@@ -3,6 +3,13 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@views/*": ["app/views/*"],
+      "@shared/*": ["app/shared/*"],
+      "@services/*": ["app/services/*"],
+      "@layouts/*": ["app/layouts/*"]
+    },
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
