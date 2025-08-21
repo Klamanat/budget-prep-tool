@@ -1,56 +1,38 @@
-  import { CommonModule } from '@angular/common';
-  import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
-  import { RouterOutlet } from '@angular/router';
-  import { HomeRoutingModule } from "@views/home/home-routing-module";
+import { CommonModule } from '@angular/common';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { HomeRoutingModule } from "@views/home/home-routing-module";
+import { filter } from 'rxjs';
 
-  @Component({
-    selector: 'app-main-layout',
-    imports: [HomeRoutingModule, RouterOutlet, CommonModule],
-    templateUrl: './main-layout.html',
-    styleUrl: './main-layout.css'
-  })
-  export class MainLayout implements OnInit, OnDestroy {
-    menuItems = [
-      { title: 'รายการงาน', route: '/item1' },
-      { title: 'บันทึกจัดสรร/โอนงบประมาณ', route: '/item2' },
-      { title: 'การจัดการข้อมูลผู้ใช้งาน', route: '/item3' },
-      { title: 'การจัดการข้อมูล', route: '/item4' },
-      { title: 'ข่าวประชาสัมพันธ์', route: '/item5' },
-      { title: 'รายงาน', route: '/item6' }
-    ];
+@Component({
+  selector: 'app-main-layout',
+  imports: [HomeRoutingModule, RouterOutlet, CommonModule],
+  templateUrl: './main-layout.html',
+  styleUrl: './main-layout.css'
+})
+export class MainLayout {
+  menuItems = [
+    { title: 'รายการงาน', path: '/home', submenu: ['submenu1', 'submenu2'] },
+    { title: 'บันทึกจัดสรร/โอนงบประมาณ', path: '/budget-allocation', submenu: ['submenu1', 'submenu2'] },
+    { title: 'การจัดการข้อมูลผู้ใช้งาน', path: '/user-management', submenu: ['submenu1', 'submenu2'] },
+    { title: 'การจัดการข้อมูล', path: '/data-management', submenu: ['submenu1', 'submenu2'] },
+    { title: 'ข่าวประชาสัมพันธ์', path: '/news', submenu: ['submenu1', 'submenu2'] },
+    { title: 'รายงาน', path: '/report', submenu: ['submenu1', 'submenu2'] }
+  ];
 
-    mobileMenuOpen = false;
-    openDropdownIndex: number | null = null;
+  submenu: any = {};
 
-  screenIsMobile(): boolean {
-    return window.innerWidth <= 768;
+  constructor(public router: Router) {
+    this.router.events
+      .pipe(
+        filter((event: any) => event instanceof NavigationEnd)
+      )
+      .subscribe((event: NavigationEnd) => {
+        this.submenu = this.menuItems.find(item => item.path === event.url) || {};
+      });
   }
 
-    private handleClickOutside = (event: MouseEvent) => {
-      if (!this.elementRef.nativeElement.contains(event.target)) {
-        this.openDropdownIndex = null;
-        this.mobileMenuOpen = false;
-      }
-    };
-
-    constructor(private elementRef: ElementRef) {}
-
-    ngOnInit() {
-      document.addEventListener('click', this.handleClickOutside, true);
-    }
-
-    ngOnDestroy() {
-      document.removeEventListener('click', this.handleClickOutside, true);
-    }
-
-    toggleMobileMenu() {
-      this.mobileMenuOpen = !this.mobileMenuOpen;
-      if (!this.mobileMenuOpen) {
-        this.openDropdownIndex = null;
-      }
-    }
-
-    toggleDropdown(idx: number) {
-      this.openDropdownIndex = this.openDropdownIndex === idx ? null : idx;
-    }
+  isActive(route: string): boolean {
+    return this.router.url === route;
   }
+}
