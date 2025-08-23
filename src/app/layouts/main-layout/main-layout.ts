@@ -11,6 +11,12 @@ import { filter } from 'rxjs';
   styleUrl: './main-layout.css'
 })
 export class MainLayout {
+  userDropdownOpen = false;
+  isSidebarCollapsed = false;
+
+  toggleSidebar() {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
+  }
   menuItems = [
     {
       title: 'การจัดการหัวบัญชี',
