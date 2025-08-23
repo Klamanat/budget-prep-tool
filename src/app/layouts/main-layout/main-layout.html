@@ -5,7 +5,7 @@
             <img [src]="isSidebarCollapsed ? 'assets/images/ktb_logo_crop.png' : 'assets/images/ktb_logo.png'"
                 alt="ktb_logo" class="h-full mx-auto" />
         </div>
-        <ul class="menu menu-md rounded-box w-full" [ngClass]="isSidebarCollapsed ? 'px-1' : 'px-4'">
+        <ul class="menu menu-md rounded-box w-full" [ngClass]="isSidebarCollapsed ? 'px-1' : 'px-0'">
             <li *ngFor="let menu of menus.submenu">
                 <details *ngIf="menu.submenu" [open]="!isSidebarCollapsed">
                     <summary>
@@ -20,13 +20,16 @@
                     </summary>
                     <ul *ngIf="!isSidebarCollapsed">
                         <li *ngFor="let item of menu.submenu">
-                            <a>
+                            <a class="hover:bg-[#E6F6FD] hover:text-[#00A6E6] active:bg-[#E6F6FD] active:text-[#00A6E6] py-3.5 px-4"
+                                [ngClass]="{'bg-[#E6F6FD] text-[#00A6E6]': isActive(item.path)}">
                                 {{item}}
                             </a>
                         </li>
                     </ul>
                 </details>
-                <a *ngIf="!menu.submenu" [routerLink]="menu.path">
+                <a class="hover:bg-[#E6F6FD] hover:text-[#00A6E6] active:bg-[#E6F6FD] active:text-[#00A6E6] py-3.5 px-4"
+                    *ngIf="!menu.submenu" [routerLink]="menu.path"
+                    [ngClass]="{'bg-[#E6F6FD] text-[#00A6E6]': isActive(menu.path)}">
                     <span *ngIf="!isSidebarCollapsed">{{menu.title}}</span>
                     <span *ngIf="isSidebarCollapsed">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
