@@ -12,15 +12,57 @@ import { filter } from 'rxjs';
 })
 export class MainLayout {
   menuItems = [
-    { title: 'รายการงาน', path: '/home', submenu: ['submenu1', 'submenu2'] },
-    { title: 'บันทึกจัดสรร/โอนงบประมาณ', path: '/budget-allocation', submenu: ['submenu1', 'submenu2'] },
-    { title: 'การจัดการข้อมูลผู้ใช้งาน', path: '/user-management', submenu: ['submenu1', 'submenu2'] },
-    { title: 'การจัดการข้อมูล', path: '/data-management', submenu: ['submenu1', 'submenu2'] },
-    { title: 'ข่าวประชาสัมพันธ์', path: '/news', submenu: ['submenu1', 'submenu2'] },
-    { title: 'รายงาน', path: '/report', submenu: ['submenu1', 'submenu2'] }
+    {
+      title: 'การจัดการหัวบัญชี',
+      path: '/home',
+      submenu: [
+        { title: 'งานที่กำลังดำเนินการ', path: '/home/ongoing' },
+        { title: 'งานที่เสร็จสิ้น', path: '/home/completed' }
+      ]
+    },
+    {
+      title: 'จัดการ Mail Template',
+      path: '/budget-allocation',
+      submenu: [
+        { title: 'งานที่กำลังดำเนินการ', path: '/home/ongoing' },
+        { title: 'งานที่เสร็จสิ้น', path: '/home/completed' }
+      ]
+    },
+    {
+      title: 'การจัดการข้อมูลผู้ใช้งาน',
+      path: '/user-management',
+      submenu: [
+        { title: 'งานที่กำลังดำเนินการ', path: '/home/ongoing' },
+        { title: 'งานที่เสร็จสิ้น', path: '/home/completed' }
+      ]
+    },
+    {
+      title: 'การจัดการข้อมูล',
+      path: '/data-management',
+      submenu: [
+        { title: 'งานที่กำลังดำเนินการ', path: '/home/ongoing' },
+        { title: 'งานที่เสร็จสิ้น', path: '/home/completed' }
+      ]
+    },
+    {
+      title: 'ข่าวประชาสัมพันธ์',
+      path: '/news',
+      submenu: [
+        { title: 'งานที่กำลังดำเนินการ', path: '/home/ongoing' },
+        { title: 'งานที่เสร็จสิ้น', path: '/home/completed' }
+      ]
+    },
+    {
+      title: 'รายงาน',
+      path: '/report',
+      submenu: [
+        { title: 'รายงาน 1', path: '/report/report1' },
+        { title: 'รายงาน 2', path: '/report/report2' }
+      ]
+    },
   ];
 
-  submenu: any = {};
+  menus: any = {};
 
   constructor(public router: Router) {
     this.router.events
@@ -28,7 +70,7 @@ export class MainLayout {
         filter((event: any) => event instanceof NavigationEnd)
       )
       .subscribe((event: NavigationEnd) => {
-        this.submenu = this.menuItems.find(item => item.path === event.url) || {};
+        this.menus = this.menuItems.find(item => item.path === event.url) || {};
       });
   }
 
