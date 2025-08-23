@@ -20,50 +20,42 @@ export class MainLayout {
   menuItems = [
     {
       title: 'การจัดการหัวบัญชี',
-      path: '/home',
+      path: '/account-head',
       submenu: [
-        { title: 'งานที่กำลังดำเนินการ', path: '/home/ongoing' },
-        { title: 'งานที่เสร็จสิ้น', path: '/home/completed' }
+        { title: 'หัวบัญชีที่กำลังดำเนินการ', path: 'ongoing' },
+        { title: 'หัวบัญชีที่เสร็จสิ้น', path: 'completed' }
       ]
     },
     {
       title: 'จัดการ Mail Template',
-      path: '/budget-allocation',
+      path: '/mail-template',
       submenu: [
-        { title: 'งานที่กำลังดำเนินการ', path: '/home/ongoing' },
-        { title: 'งานที่เสร็จสิ้น', path: '/home/completed' }
+        { title: 'Mail Template ที่กำลังดำเนินการ', path: 'ongoing' },
+        { title: 'Mail Template ที่เสร็จสิ้น', path: 'completed' }
       ]
     },
     {
-      title: 'การจัดการข้อมูลผู้ใช้งาน',
-      path: '/user-management',
+      title: 'จัดการหน่วยงาน [Cost Center Chain]',
+      path: '/cost-center-chain',
       submenu: [
-        { title: 'งานที่กำลังดำเนินการ', path: '/home/ongoing' },
-        { title: 'งานที่เสร็จสิ้น', path: '/home/completed' }
+        { title: 'หน่วยงานที่กำลังดำเนินการ', path: 'ongoing' },
+        { title: 'หน่วยงานที่เสร็จสิ้น', path: 'completed' }
       ]
     },
     {
-      title: 'การจัดการข้อมูล',
-      path: '/data-management',
+      title: 'การจัดการ User PBD',
+      path: '/user-pbd',
       submenu: [
-        { title: 'งานที่กำลังดำเนินการ', path: '/home/ongoing' },
-        { title: 'งานที่เสร็จสิ้น', path: '/home/completed' }
+        { title: 'User PBD ที่กำลังดำเนินการ', path: 'ongoing' },
+        { title: 'User PBD ที่เสร็จสิ้น', path: 'completed' }
       ]
     },
     {
-      title: 'ข่าวประชาสัมพันธ์',
-      path: '/news',
+      title: 'การจัดการงบวงเงิน',
+      path: '/budget-management',
       submenu: [
-        { title: 'งานที่กำลังดำเนินการ', path: '/home/ongoing' },
-        { title: 'งานที่เสร็จสิ้น', path: '/home/completed' }
-      ]
-    },
-    {
-      title: 'รายงาน',
-      path: '/report',
-      submenu: [
-        { title: 'รายงาน 1', path: '/report/report1' },
-        { title: 'รายงาน 2', path: '/report/report2' }
+        { title: 'งบวงเงินที่กำลังดำเนินการ', path: 'ongoing' },
+        { title: 'งบวงเงินที่เสร็จสิ้น', path: 'completed' }
       ]
     },
   ];
@@ -71,13 +63,14 @@ export class MainLayout {
   menus: any = {};
 
   constructor(public router: Router) {
-    this.router.events
-      .pipe(
-        filter((event: any) => event instanceof NavigationEnd)
-      )
-      .subscribe((event: NavigationEnd) => {
-        this.menus = this.menuItems.find(item => item.path === event.url) || {};
-      });
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        this.menus = this.menuItems.find(item =>
+          event.urlAfterRedirects.startsWith(item.path)
+        ) || {};
+      }
+    });
+
   }
 
   isActive(route: string): boolean {
