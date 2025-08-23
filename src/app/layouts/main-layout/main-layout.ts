@@ -74,6 +74,6 @@ export class MainLayout {
   }
 
   isActive(route: string): boolean {
-    return this.router.url === route;
+    return this.router.url.includes(route);
   }
 }
