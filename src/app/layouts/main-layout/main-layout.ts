@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { ComponentsModule } from '@shared/components/components-module';
 import { HomeRoutingModule } from "@views/home/home-routing-module";
 import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [HomeRoutingModule, RouterOutlet, CommonModule],
+  imports: [HomeRoutingModule, RouterOutlet, CommonModule, ComponentsModule],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.css'
 })
