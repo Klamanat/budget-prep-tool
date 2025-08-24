@@ -27,17 +27,15 @@
                         </li>
                     </ul>
                 </details>
-                <a class="hover:bg-blue-100 hover:text-blue-400 active:bg-blue-100 active:text-blue-400 py-3.5 px-4"
+                <a ngClass="[isSidebarCollapsed ? 'flex justify-center ' : '']" class="hover:bg-blue-100 hover:text-blue-400 active:bg-blue-100 active:text-blue-400 py-3.5"
                     *ngIf="!menu.submenu" [routerLink]="menu.path"
                     [ngClass]="{'bg-blue-100 text-blue-400': isActive(menu.path)}">
-                    <span *ngIf="!isSidebarCollapsed">{{menu.title}}</span>
-                    <span *ngIf="isSidebarCollapsed">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1" />
-                        </svg>
-                    </span>
+                    <div class="flex items-center gap-2">
+                        <app-icon *ngIf="menu?.icon" [name]="menu?.icon" size="25" class="text-gray-700" [ariaLabel]="menu?.title"></app-icon>
+                        <span *ngIf="!isSidebarCollapsed" class="text-gray-700">
+                            {{menu.title}}
+                        </span>
+                    </div>
                 </a>
             </li>
         </ul>
@@ -57,32 +55,21 @@
             </div>
             <div class="flex-1 flex justify-end gap-4 items-center px-2">
                 <div class="hidden sm:flex items-center gap-2 bg-white/10 border border-white/30 rounded px-2 py-1">
-                    <app-icon name="minus-square" size="25" class="text-blue-500" ariaLabel="minus-square"></app-icon>
+                    <app-icon name="minus-square" size="22" class="text-blue-500" ariaLabel="minus-square"></app-icon>
                     <span class="text-blue-400 text-xs">ก<span class="text-xl">ก</span></span>
-                    <app-icon name="add-square" size="25" class="text-blue-500" ariaLabel="add-square"></app-icon>
+                    <app-icon name="add-square" size="22" class="text-blue-500" ariaLabel="add-square"></app-icon>
                 </div>
-                <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" width="25px" height="25px" viewBox="0 0 64 64"
-                    enable-background="new 0 0 64 64" xml:space="preserve">
-                    <g>
-                        <path class="fill-blue-400" d="M56,44c-1.832,0-4-2.168-4-4V20C52,8.973,43.027,0,32,0S12,8.973,12,20v20c0,1.793-2.207,4-4,4
-		c-2.211,0-4,1.789-4,4s1.789,4,4,4h48c2.211,0,4-1.789,4-4S58.211,44,56,44z" />
-                        <path class="fill-blue-400" d="M32,64c4.418,0,8-3.582,8-8H24C24,60.418,27.582,64,32,64z" />
-                    </g>
-                </svg>
+                <app-icon name="notification-bell" size="30" class="text-blue-400" ariaLabel="notification-bell"></app-icon>
                 <div class="dropdown dropdown-end cursor-pointer" [class.dropdown-open]="userDropdownOpen"
                     (focusin)="userDropdownOpen = true" (focusout)="userDropdownOpen = false">
                     <div class="flex items-center gap-2" tabindex="0">
-                        <app-icon name="profile-circle" size="25" class="text-gray-700" ariaLabel="profile-circle"></app-icon>
+                        <app-icon name="profile-circle" size="25" class="text-gray-700"
+                            ariaLabel="profile-circle"></app-icon>
                         <span class="text-sm font-medium text-gray-700">สมคิด พัฒนาอุตสาหกิจ</span>
-                        <svg *ngIf="!userDropdownOpen" width="20" height="20" fill="none" stroke="#292D32"
-                            stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                        <svg *ngIf="userDropdownOpen" width="20" height="20" fill="none" stroke="#292D32"
-                            stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-                        </svg>
+                        <app-icon *ngIf="!userDropdownOpen" name="arrow-down" size="20" class="text-gray-700"
+                            ariaLabel="arrow-down"></app-icon>
+                        <app-icon *ngIf="userDropdownOpen" name="arrow-up" size="20" class="text-gray-700"
+                            ariaLabel="arrow-up"></app-icon>
                     </div>
                     <div tabindex="0" class="dropdown-content menu bg-base-100 top-[42px] z-1 w-96 p-6 shadow-sm">
                         <div class="space-y-1">

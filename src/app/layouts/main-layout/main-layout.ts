@@ -23,8 +23,13 @@ export class MainLayout {
       title: 'การจัดการหัวบัญชี',
       path: '/account-head',
       submenu: [
-        { title: 'หัวบัญชีที่กำลังดำเนินการ', path: 'ongoing' },
-        { title: 'หัวบัญชีที่เสร็จสิ้น', path: 'completed' }
+        { title: 'รายการงาน', path: 'ongoing', icon: 'list-box' },
+        { title: 'บันทึกจัดสรร', path: 'ongoing', icon: 'archive' },
+        { title: 'จัดการAdhoc', path: 'ongoing', icon: 'task-time' },
+        { title: 'การจัดการข้อมูลผู้ใช้งาน', path: 'ongoing', icon: 'account-settings' },
+        { title: 'การจัดการข้อมูล', path: 'ongoing', icon: 'data-center' },
+        { title: 'ข่าวประชาสัมพันธ์', path: 'ongoing', icon: 'megaphone' },
+        { title: 'รายงาน', path: 'completed', icon: 'report' }
       ]
     },
     {
