@@ -4,7 +4,7 @@ import { MainLayout } from '@layouts/main-layout/main-layout';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: '/home',
+        redirectTo: '/user-pbd',
         pathMatch: 'full'
     },
     {
@@ -36,14 +36,6 @@ export const routes: Routes = [
                 path: '',
                 loadChildren: () => import('@views/account-head/account-head-module').then(m => m.AccountHeadModule)
             },
-            {
-                path: 'ongoing',
-                loadChildren: () => import('@views/account-head/account-head-module').then(m => m.AccountHeadModule)
-            },
-            {
-                path: 'completed',
-                loadChildren: () => import('@views/account-head/account-head-module').then(m => m.AccountHeadModule)
-            }
         ]
     },
     {
@@ -54,14 +46,6 @@ export const routes: Routes = [
                 path: '',
                 loadChildren: () => import('@views/mail-template/mail-template-module').then(m => m.MailTemplateModule)
             },
-            {
-                path: 'ongoing',
-                loadChildren: () => import('@views/mail-template/mail-template-module').then(m => m.MailTemplateModule)
-            },
-            {
-                path: 'completed',
-                loadChildren: () => import('@views/mail-template/mail-template-module').then(m => m.MailTemplateModule)
-            }
         ]
     },
     {
@@ -72,14 +56,6 @@ export const routes: Routes = [
                 path: '',
                 loadChildren: () => import('@views/cost-center-chain/cost-center-chain-module').then(m => m.CostCenterChainModule)
             },
-            {
-                path: 'ongoing',
-                loadChildren: () => import('@views/cost-center-chain/cost-center-chain-module').then(m => m.CostCenterChainModule)
-            },
-            {
-                path: 'completed',
-                loadChildren: () => import('@views/cost-center-chain/cost-center-chain-module').then(m => m.CostCenterChainModule)
-            }
         ]
     },
     {
@@ -90,14 +66,6 @@ export const routes: Routes = [
                 path: '',
                 loadChildren: () => import('@views/user-pbd/user-pbd-module').then(m => m.UserPBDModule)
             },
-            {
-                path: 'ongoing',
-                loadChildren: () => import('@views/user-pbd/user-pbd-module').then(m => m.UserPBDModule)
-            },
-            {
-                path: 'completed',
-                loadChildren: () => import('@views/user-pbd/user-pbd-module').then(m => m.UserPBDModule)
-            }
         ]
     },
     {
@@ -108,14 +76,6 @@ export const routes: Routes = [
                 path: '',
                 loadChildren: () => import('@views/budget-management/budget-management-module').then(m => m.BudgetManagementModule)
             },
-            {
-                path: 'ongoing',
-                loadChildren: () => import('@views/budget-management/budget-management-module').then(m => m.BudgetManagementModule)
-            },
-            {
-                path: 'completed',
-                loadChildren: () => import('@views/budget-management/budget-management-module').then(m => m.BudgetManagementModule)
-            }
         ]
     }
 ];
