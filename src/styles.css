@@ -6,3 +6,12 @@
 html, body {
   height: 100%;
 }
+
+@theme {
+  --color-blue-100: #E6F6FD;
+  --color-blue-400: #00A6E6;
+  --color-blue-700: #007EAF;
+
+  --color-gray-700: #414D63;
+  --color-gray-800: #1B273A;
+}

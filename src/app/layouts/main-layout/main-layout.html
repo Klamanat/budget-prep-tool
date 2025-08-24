@@ -20,16 +20,16 @@
                     </summary>
                     <ul *ngIf="!isSidebarCollapsed">
                         <li *ngFor="let item of menu.submenu">
-                            <a class="hover:bg-[#E6F6FD] hover:text-[#00A6E6] active:bg-[#E6F6FD] active:text-[#00A6E6] py-3.5 px-4"
-                                [ngClass]="{'bg-[#E6F6FD] text-[#00A6E6]': isActive(item.path)}">
+                            <a class="hover:bg-blue-100 hover:text-blue-400 active:bg-blue-100 active:text-blue-400 py-3.5 px-4"
+                                [ngClass]="{'bg-blue-100 text-blue-400': isActive(item.path)}">
                                 {{item}}
                             </a>
                         </li>
                     </ul>
                 </details>
-                <a class="hover:bg-[#E6F6FD] hover:text-[#00A6E6] active:bg-[#E6F6FD] active:text-[#00A6E6] py-3.5 px-4"
+                <a class="hover:bg-blue-100 hover:text-blue-400 active:bg-blue-100 active:text-blue-400 py-3.5 px-4"
                     *ngIf="!menu.submenu" [routerLink]="menu.path"
-                    [ngClass]="{'bg-[#E6F6FD] text-[#00A6E6]': isActive(menu.path)}">
+                    [ngClass]="{'bg-blue-100 text-blue-400': isActive(menu.path)}">
                     <span *ngIf="!isSidebarCollapsed">{{menu.title}}</span>
                     <span *ngIf="isSidebarCollapsed">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
@@ -49,38 +49,38 @@
                     <button class="hidden md:block z-50 bg-white/80 p-1 cursor-pointer" (click)="toggleSidebar()">
                         <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4 18L20 18" stroke="#00A6E6" stroke-width="2" stroke-linecap="round" />
-                            <path d="M4 12L20 12" stroke="#00A6E6" stroke-width="2" stroke-linecap="round" />
-                            <path d="M4 6L20 6" stroke="#00A6E6" stroke-width="2" stroke-linecap="round" />
+                            <path class="stroke-blue-400" d="M4 18L20 18" stroke-width="2" stroke-linecap="round" />
+                            <path class="stroke-blue-400" d="M4 12L20 12" stroke-width="2" stroke-linecap="round" />
+                            <path class="stroke-blue-400" d="M4 6L20 6" stroke-width="2" stroke-linecap="round" />
                         </svg>
                     </button>
                 </div>
                 <div>
-                    <p class="text-[#00A6E6] text-2xl font-bold">Budget Prep. Tool</p>
-                    <p class="text-[#00A6E6] text-sm font-normal">งบประมาณประจำปี</p>
+                    <p class="text-blue-400 text-2xl font-bold">Budget Prep. Tool</p>
+                    <p class="text-blue-400 text-sm font-normal">งบประมาณประจำปี</p>
                 </div>
             </div>
             <div class="flex-1 flex justify-end gap-4 items-center px-2">
                 <div class="hidden sm:flex items-center gap-2 bg-white/10 border border-white/30 rounded px-2 py-1">
                     <svg width="20px" height="20px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
-                        <path fill="#00A6E6" fill-rule="evenodd"
+                        <path class="fill-blue-400" fill-rule="evenodd"
                             d="M3.25 1A2.25 2.25 0 001 3.25v9.5A2.25 2.25 0 003.25 15h9.5A2.25 2.25 0 0015 12.75v-9.5A2.25 2.25 0 0012.75 1h-9.5zm2 6a.75.75 0 000 1.5h5.5a.75.75 0 000-1.5h-5.5z"
                             clip-rule="evenodd" />
                     </svg>
-                    <span class="text-[#00A6E6] text-xs">ก<span class="text-xl">ก</span></span>
+                    <span class="text-blue-400 text-xs">ก<span class="text-xl">ก</span></span>
                     <svg width="22px" height="22px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                             d="M12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22ZM12 8.25C12.4142 8.25 12.75 8.58579 12.75 9V11.25H15C15.4142 11.25 15.75 11.5858 15.75 12C15.75 12.4142 15.4142 12.75 15 12.75H12.75L12.75 15C12.75 15.4142 12.4142 15.75 12 15.75C11.5858 15.75 11.25 15.4142 11.25 15V12.75H9C8.58579 12.75 8.25 12.4142 8.25 12C8.25 11.5858 8.58579 11.25 9 11.25H11.25L11.25 9C11.25 8.58579 11.5858 8.25 12 8.25Z"
-                            fill="#00A6E6" />
+                            class="fill-blue-400" />
                     </svg>
                 </div>
                 <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" width="25px" height="25px" viewBox="0 0 64 64"
                     enable-background="new 0 0 64 64" xml:space="preserve">
                     <g>
-                        <path fill="#00A6E6" d="M56,44c-1.832,0-4-2.168-4-4V20C52,8.973,43.027,0,32,0S12,8.973,12,20v20c0,1.793-2.207,4-4,4
+                        <path class="fill-blue-400" d="M56,44c-1.832,0-4-2.168-4-4V20C52,8.973,43.027,0,32,0S12,8.973,12,20v20c0,1.793-2.207,4-4,4
 		c-2.211,0-4,1.789-4,4s1.789,4,4,4h48c2.211,0,4-1.789,4-4S58.211,44,56,44z" />
-                        <path fill="#00A6E6" d="M32,64c4.418,0,8-3.582,8-8H24C24,60.418,27.582,64,32,64z" />
+                        <path class="fill-blue-400" d="M32,64c4.418,0,8-3.582,8-8H24C24,60.418,27.582,64,32,64z" />
                     </g>
                 </svg>
                 <div class="dropdown dropdown-end cursor-pointer" [class.dropdown-open]="userDropdownOpen"
@@ -98,7 +98,7 @@
                                 d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
                                 stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        <span class="text-sm font-medium text-[#414D63]">สมคิด พัฒนาอุตสาหกิจ</span>
+                        <span class="text-sm font-medium text-gray-700">สมคิด พัฒนาอุตสาหกิจ</span>
                         <svg *ngIf="!userDropdownOpen" width="20" height="20" fill="none" stroke="#292D32"
                             stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
@@ -110,9 +110,9 @@
                     </div>
                     <div tabindex="0" class="dropdown-content menu bg-base-100 top-[42px] z-1 w-96 p-6 shadow-sm">
                         <div class="space-y-1">
-                            <p class="text-sm font-semibold text-[#1B273A]">ข้อมูลผู้ใช้</p>
-                            <p class="text-sm font-normal text-[#414D63]">(585039) สมคิด พัฒนาอุตสาหกิจ </p>
-                            <p class="text-sm font-normal text-[#414D63]">(999990) ฝ่ายวางแผนและงบประมาณ</p>
+                            <p class="text-sm font-semibold text-gray-800">ข้อมูลผู้ใช้</p>
+                            <p class="text-sm font-normal text-gray-700">(585039) สมคิด พัฒนาอุตสาหกิจ </p>
+                            <p class="text-sm font-normal text-gray-700">(999990) ฝ่ายวางแผนและงบประมาณ</p>
                         </div>
                         <div class="border-b border-[#E7EBEE] my-2"></div>
 
@@ -142,10 +142,10 @@
         </div>
 
 
-        <div class="h-10 bg-[#00A6E6] shadow-md">
+        <div class="h-10 bg-blue-400 shadow-md">
             <ul class="flex items-center px-8 h-full">
-                <li *ngFor="let item of menuItems; let i = index" class="py-2 px-6 hover:bg-[#007EAF]"
-                    [ngClass]="{'bg-[#007EAF]': isActive(item.path)}">
+                <li *ngFor="let item of menuItems; let i = index" class="py-2 px-6 hover:bg-blue-700"
+                    [ngClass]="{'bg-blue-700': isActive(item.path)}">
                     <a class="text-white text-sm font-medium" [routerLink]="item.path">{{ item.title }}</a>
                 </li>
             </ul>
