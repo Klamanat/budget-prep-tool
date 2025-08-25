@@ -1,0 +1,4 @@
+<label class="label cursor-pointer">
+  <input type="checkbox" class="checkbox checkbox-primary" [(ngModel)]="checked" (ngModelChange)="checkedChange.emit($event)" />
+  <span class="label-text ml-2">{{label}}</span>
+</label>
