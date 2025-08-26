@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { ComponentsModule } from '@shared/components/components-module';
 import { HomeRoutingModule } from "@views/home/home-routing-module";
@@ -98,6 +98,7 @@ export class MainLayout {
   ];
 
   menus: any = {};
+  openedMenu: any = null;
 
   constructor(public router: Router) {
     this.router.events.subscribe((event: any) => {
@@ -112,5 +113,25 @@ export class MainLayout {
 
   isActive(route: string): boolean {
     return this.router.url.includes(route);
+  }
+
+  // toggle menu
+  toggleMenu(menu: any) {
+    if (this.openedMenu === menu) {
+      this.openedMenu = null; // กดซ้ำปิด
+    } else {
+      this.openedMenu = menu; // เปิดเมนูใหม่
+    }
+  }
+
+  // ฟัง click ข้างนอก component
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: Event) {
+    const target = event.target as HTMLElement;
+
+    // ตรวจสอบว่า click ไม่อยู่ใน sidebar
+    if (!target.closest('.sidebar-menu')) {
+      this.openedMenu = null;
+    }
   }
 }

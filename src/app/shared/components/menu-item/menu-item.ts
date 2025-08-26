@@ -11,7 +11,6 @@ import { Icon } from '../icon/icon';
 })
 export class MenuItem {
   @Input() menu: any;
-  @Input() isSidebarCollapsed = false;
   @Input() isParent: boolean = false;
 
   @Output() toggleParent = new EventEmitter<string>();

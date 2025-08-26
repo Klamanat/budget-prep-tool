@@ -1,4 +1,4 @@
-<li [ngClass]="{ 'border-t border-gray-300': isParent }">
+<li [ngClass]="{ 'border-b border-gray-300': isParent }">
     @if (menu?.submenu?.length) {
     <details>
         <summary
@@ -7,13 +7,10 @@
                 @if (menu?.icon) {
                 <app-icon [name]="menu.icon" size="25" [ariaLabel]="menu.title"></app-icon>
                 }
-                @if (!isSidebarCollapsed) {
                 <span>{{ menu.title }}</span>
-                }
             </div>
         </summary>
 
-        @if (!isSidebarCollapsed) {
         <ul class="ml-4 pl-4 py-2 relative">
             <li *ngFor="let child of menu.submenu; let last = last" class="relative pl-4
              before:content-[''] before:absolute before:left-0 before:top-1/2 before:w-4
@@ -24,24 +21,20 @@
                 <!-- เรียก component ซ้อน -->
                 <app-menu-item
                     class="hover:bg-blue-100 active:!bg-blue-100 focus-visible:!bg-blue-100 pl-1 text-gray-700 hover:text-blue-400"
-                    [menu]="child" [isSidebarCollapsed]="isSidebarCollapsed"></app-menu-item>
+                    [menu]="child"></app-menu-item>
             </li>
         </ul>
-        }
     </details>
     }
     @else {
     <a [routerLink]="menu.path" class="hover:bg-transparent active:!bg-transparent pb-2 px-1" [ngClass]="{
        'bg-blue-100 text-blue-400': isActive(menu.path),
-       'flex justify-center': isSidebarCollapsed
      }">
         <div class="flex items-center gap-2">
             @if (menu?.icon) {
             <app-icon [name]="menu.icon" size="25" [ariaLabel]="menu.title"></app-icon>
             }
-            @if (!isSidebarCollapsed) {
             <span class="text-sm">{{ menu.title }}</span>
-            }
         </div>
     </a>
     }
