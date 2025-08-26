@@ -16,6 +16,12 @@ body {
   --color-blue-500: #0195CF;
   --color-blue-700: #007EAF;
 
+  --color-gray-100: #F5F7FA;
+  --color-gray-200: #E4E7EB;
+  --color-gray-300: #CFD9E0;
+  --color-gray-400: #A0A7B1;
+  --color-gray-500: #7B828D;
+  --color-gray-600: #5B616B;
   --color-gray-700: #414D63;
   --color-gray-800: #1B273A;
 }

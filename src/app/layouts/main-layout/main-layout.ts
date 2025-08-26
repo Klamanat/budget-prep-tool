@@ -99,6 +99,7 @@ export class MainLayout {
 
   menus: any = {};
   openedMenu: any = null;
+  isDrawerOpen = false;
 
   constructor(public router: Router) {
     this.router.events.subscribe((event: any) => {
@@ -122,6 +123,14 @@ export class MainLayout {
     } else {
       this.openedMenu = menu; // เปิดเมนูใหม่
     }
+  }
+
+  toggleDrawer() {
+    this.isDrawerOpen = !this.isDrawerOpen;
+  }
+
+  closeDrawer() {
+    this.isDrawerOpen = false;
   }
 
   // ฟัง click ข้างนอก component
