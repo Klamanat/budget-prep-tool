@@ -9,6 +9,7 @@ import { Textarea } from './textarea/textarea';
 import { Checkbox } from './checkbox/checkbox';
 import { Alert } from './alert/alert';
 import { Radio } from './radio/radio';
+import { MenuItem } from './menu-item/menu-item';
 
 @NgModule({
   declarations: [],
@@ -23,7 +24,8 @@ import { Radio } from './radio/radio';
     Checkbox,
     Alert,
     Radio,
+    MenuItem
   ],
-  exports: [Button, Icon, Table, Select, InputComponent, Textarea, Checkbox, Alert, Radio]
+  exports: [Button, Icon, Table, Select, InputComponent, Textarea, Checkbox, Alert, Radio, MenuItem]
 })
 export class ComponentsModule { }

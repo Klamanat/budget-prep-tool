@@ -1,109 +1,59 @@
 <div class="h-full flex bg-gray-100">
     <div [ngClass]="isSidebarCollapsed ? 'w-[60px]' : 'w-[300px]'"
-        class="transition-all duration-300 shadow-md bg-white border-r border-gray-200 overflow-hidden">
-        <div class="h-[60px]">
-            <img [src]="isSidebarCollapsed ? 'assets/images/ktb_logo_crop.png' : 'assets/images/ktb_logo.png'"
+        class="transition-all duration-300 shadow-md bg-white overflow-hidden">
+        <div class="h-[68px] bg-[#00A6E6]">
+            <img [src]="isSidebarCollapsed ? 'assets/images/ktb_logo_crop.png' : 'assets/images/ktb_logo_1.png'"
                 alt="ktb_logo" class="h-full mx-auto" />
         </div>
-        <ul class="menu menu-md rounded-box w-full" [ngClass]="isSidebarCollapsed ? 'px-1' : 'px-0'">
-            <li *ngFor="let menu of menus.submenu">
-                <details *ngIf="menu.submenu" [open]="!isSidebarCollapsed">
-                    <summary>
-                    <div class="flex items-center gap-2">
-                        <app-icon *ngIf="menu?.icon" [name]="menu?.icon" size="25" class="text-gray-700" [ariaLabel]="menu?.title"></app-icon>
-                        <span *ngIf="!isSidebarCollapsed" class="text-gray-700">
-                            {{menu.title}}
-                        </span>
-                    </div>
-                    </summary>
-                    <ul *ngIf="!isSidebarCollapsed">
-                        <li *ngFor="let item of menu.submenu">
-                            <a class="hover:bg-blue-100 hover:text-blue-400 active:bg-blue-100 active:text-blue-400 py-3.5 px-4"
-                                [ngClass]="{'bg-blue-100 text-blue-400': isActive(item.path)}">
-                                {{item}}
-                            </a>
-                        </li>
-                    </ul>
-                </details>
-                <a ngClass="[isSidebarCollapsed ? 'flex justify-center ' : '']" class="hover:bg-blue-100 hover:text-blue-400 active:bg-blue-100 active:text-blue-400 py-3.5"
-                    *ngIf="!menu.submenu" [routerLink]="menu.path"
-                    [ngClass]="{'bg-blue-100 text-blue-400': isActive(menu.path)}">
-                    <div class="flex items-center gap-2">
-                        <app-icon *ngIf="menu?.icon" [name]="menu?.icon" size="25" [ariaLabel]="menu?.title"></app-icon>
-                        <span *ngIf="!isSidebarCollapsed">
-                            {{menu.title}}
-                        </span>
-                    </div>
-                </a>
-            </li>
+        <div class="bg-blue-700 h-10 flex items-center justify-center gap-2">
+            <app-icon [name]="menus.icon" size="25" class="text-white" [ariaLabel]="menus.title"></app-icon>
+
+            @if(!isSidebarCollapsed) {
+            <span class="text-white text-sm font-semibold">{{menus.title}}</span>
+            }
+        </div>
+        <ul class="menu menu-md rounded-box w-full" [ngClass]="isSidebarCollapsed ? 'px-1' : 'p-0'">
+            <app-menu-item *ngFor="let menu of menus.submenu" [menu]="menu" [isSidebarCollapsed]="isSidebarCollapsed"
+                [isParent]="true">
+            </app-menu-item>
         </ul>
     </div>
     <div class="flex-1">
-        <div class="flex px-6 items-center bg-white border-b border-gray-200 h-[60px]">
+        <div class="flex px-6 items-center bg-gradient-to-r from-[#00A6E6] to-[#007BAA] h-[68px]">
             <div class="flex w-64 justify-between items-center">
                 <div class="px-2">
-                    <button class="hidden md:block z-50 bg-white/80 p-1 cursor-pointer" (click)="toggleSidebar()">
-                        <app-icon name="burger-menu" size="25" class="text-gray-700" ariaLabel="burger-menu"></app-icon>
+                    <button class="hidden md:block z-50 p-1 cursor-pointer" (click)="toggleSidebar()">
+                        <app-icon name="burger-menu" size="25" class="text-blue-100" ariaLabel="burger-menu"></app-icon>
                     </button>
                 </div>
                 <div>
-                    <p class="text-blue-400 text-2xl font-bold">Budget Prep. Tool</p>
-                    <p class="text-blue-400 text-sm font-normal">งบประมาณประจำปี</p>
+                    <p class="text-white text-2xl font-bold">Budget Prep. Tool</p>
                 </div>
             </div>
             <div class="flex-1 flex justify-end gap-4 items-center px-2">
-                <div class="hidden sm:flex items-center gap-2 bg-white/10 border border-white/30 rounded px-2 py-1">
-                    <app-icon name="minus-square" size="22" class="text-blue-500" ariaLabel="minus-square"></app-icon>
-                    <span class="text-blue-400 text-xs">ก<span class="text-xl">ก</span></span>
-                    <app-icon name="add-square" size="22" class="text-blue-500" ariaLabel="add-square"></app-icon>
-                </div>
-                <app-icon name="notification-bell" size="30" class="text-blue-400" ariaLabel="notification-bell"></app-icon>
-                <div class="dropdown dropdown-end cursor-pointer" [class.dropdown-open]="userDropdownOpen"
-                    (focusin)="userDropdownOpen = true" (focusout)="userDropdownOpen = false">
+                <app-icon name="notification-bell" size="30" class="text-white"
+                    ariaLabel="notification-bell"></app-icon>
+                <div class="dropdown dropdown-end cursor-pointer">
                     <div class="flex items-center gap-2" tabindex="0">
-                        <app-icon name="profile-circle" size="25" class="text-gray-700"
-                            ariaLabel="profile-circle"></app-icon>
-                        <span class="text-sm font-medium text-gray-700">สมคิด พัฒนาอุตสาหกิจ</span>
-                        <app-icon *ngIf="!userDropdownOpen" name="arrow-down" size="20" class="text-gray-700"
-                            ariaLabel="arrow-down"></app-icon>
-                        <app-icon *ngIf="userDropdownOpen" name="arrow-up" size="20" class="text-gray-700"
-                            ariaLabel="arrow-up"></app-icon>
-                    </div>
-                    <div tabindex="0" class="dropdown-content menu bg-base-100 top-[42px] z-1 w-96 p-6 shadow-sm">
-                        <div class="space-y-1">
-                            <p class="text-sm font-semibold text-gray-800">ข้อมูลผู้ใช้</p>
-                            <p class="text-sm font-normal text-gray-700">(585039) สมคิด พัฒนาอุตสาหกิจ </p>
-                            <p class="text-sm font-normal text-gray-700">(999990) ฝ่ายวางแผนและงบประมาณ</p>
+                        <app-icon name="profile" size="35" class="text-white" ariaLabel="profile"></app-icon>
+                        <div>
+                            <p class="text-sm font-medium text-white">สมคิด พัฒนาอุตสาหกิจ</p>
+                            <p class="text-xs font-medium text-blue-200">ฝ่ายวางแผนและงบประมาณ</p>
                         </div>
-                        <div class="border-b border-[#E7EBEE] my-2"></div>
-
-                        <div class="flex flex-col gap-3">
-                            <!-- ปุ่มออกจากระบบ -->
-                            <button
-                                class="flex items-center justify-center gap-2 border border-red-500 text-red-500 px-4 py-2 rounded-lg font-medium hover:bg-red-50 transition">
-                                <app-icon name="logout" size="20" class="text-red-500" ariaLabel="logout"></app-icon>
-                                <span>ออกจากระบบ</span>
-                            </button>
-
-                            <!-- ปุ่มงบประมาณประจำปี -->
-                            <button
-                                class="flex items-center justify-center gap-2 bg-sky-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-sky-600 transition">
-                                <span class="text-lg">⇄</span>
-                                <span>งบประมาณประจำปี</span>
-                            </button>
-                        </div>
-
                     </div>
                 </div>
             </div>
         </div>
 
 
-        <div class="h-10 bg-blue-400 shadow-md">
+        <div class="h-10 bg-white shadow-md">
             <ul class="flex items-center px-8 h-full">
-                <li *ngFor="let item of menuItems; let i = index" class="py-2 px-6 hover:bg-blue-700"
-                    [ngClass]="{'bg-blue-700': isActive(item.path)}">
-                    <a class="text-white text-sm font-medium" [routerLink]="item.path">{{ item.title }}</a>
+                <li *ngFor="let item of menuItems; let i = index" class="py-2 px-6 flex items-center gap-0.5">
+                    <app-icon [name]="item.icon" size="20"
+                        [ngClass]="isActive(item.path) ? 'text-blue-400' : 'text-gray-700'"
+                        [ariaLabel]="item.title"></app-icon>
+                    <a class="text-sm font-medium" [ngClass]="isActive(item.path) ? 'text-blue-400' : 'text-gray-700'"
+                        [routerLink]="item.path">{{ item.title }}</a>
                 </li>
             </ul>
         </div>

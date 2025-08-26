@@ -3,16 +3,23 @@
 @plugin "daisyui";
 
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
 @theme {
   --color-blue-100: #E6F6FD;
+  --color-blue-200: #D9F2FC;
+  --color-blue-300: #B0E4F8;
   --color-blue-400: #00A6E6;
   --color-blue-500: #0195CF;
   --color-blue-700: #007EAF;
 
   --color-gray-700: #414D63;
   --color-gray-800: #1B273A;
+}
+
+.menu :where(li ul):before {
+  width: 0 !important;
 }

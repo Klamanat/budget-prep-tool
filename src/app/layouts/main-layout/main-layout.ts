@@ -20,43 +20,81 @@ export class MainLayout {
   }
   menuItems = [
     {
-      title: 'การจัดการหัวบัญชี',
+      title: 'หน้าหลัก',
       path: '/account-head',
+      icon: 'home',
       submenu: [
 
       ]
     },
     {
-      title: 'จัดการ Mail Template',
+      title: 'งบประมาณประจำปี',
       path: '/mail-template',
+      icon: 'start-year',
       submenu: [
+        {
+          title: 'รายงานงาน',
+          icon: 'report-gantt',
+          submenu: [
+            { title: 'รายงานงาน 1' },
+            { title: 'รายงานงาน 2' }
+          ]
+        },
+        {
+          title: 'บันทึกจัดสรร',
+          icon: 'archive-success-outline',
+          submenu: [
+            { title: 'บันทึกจัดสรร 1' },
+            { title: 'บันทึกจัดสรร 2' }
+          ]
+        },
+        {
+          title: 'จัดการAdhoc',
+          icon: 'task-time',
+          submenu: [
+            { title: 'จัดการAdhoc 1' },
+            { title: 'จัดการAdhoc 2' }
+          ]
+        },
+        {
+          title: 'การจัดการข้อมูลผู้ใช้งาน',
+          icon: 'user-cog',
+          submenu: [
+            { title: 'การจัดการข้อมูลผู้ใช้งาน 1' },
+            { title: 'การจัดการข้อมูลผู้ใช้งาน 2' }
+          ]
+        },
+        {
+          title: 'ข่าวประชาสัมพันธ์',
+          icon: 'speaker-phone',
+          submenu: [
+            { title: 'ข่าวประชาสัมพันธ์ 1' },
+            { title: 'ข่าวประชาสัมพันธ์ 2' }
+          ]
+        },
+        {
+          title: 'รายงาน',
+          icon: 'bookmark-report',
+          submenu: [
+            { title: 'รายงาน 1' },
+            { title: 'รายงาน 2' }
+          ]
+        }
       ]
     },
     {
-      title: 'จัดการหน่วยงาน [Cost Center Chain]',
+      title: 'งบประมาณระหว่างปี',
       path: '/cost-center-chain',
+      icon: 'coins',
       submenu: [
       ]
     },
     {
-      title: 'การจัดการ User PBD',
+      title: 'การจัดการระบบ',
       path: '/user-pbd',
-      submenu: [
-        { title: 'รายการงาน', path: 'list', icon: 'list-box' },
-        { title: 'บันทึกจัดสรร', path: 'allocation', icon: 'archive' },
-        { title: 'จัดการAdhoc', path: 'adhoc', icon: 'task-time' },
-        { title: 'การจัดการข้อมูลผู้ใช้งาน', path: 'user-management', icon: 'account-settings' },
-        { title: 'การจัดการข้อมูล', path: 'data-management', icon: 'data-center' },
-        { title: 'ข่าวประชาสัมพันธ์', path: 'news', icon: 'megaphone' },
-        { title: 'รายงาน', path: 'report', icon: 'report' }
-      ]
-    },
-    {
-      title: 'การจัดการงบวงเงิน',
-      path: '/budget-management',
-      submenu: [
-      ]
-    },
+      icon: 'gui-management',
+      submenu: []
+    }
   ];
 
   menus: any = {};
