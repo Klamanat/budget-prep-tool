@@ -1,0 +1,8 @@
+<ul class="menu bg-base-100 rounded-lg p-2 w-56">
+    <li *ngFor="let item of menus">
+        <a>{{ item.title }}</a>
+
+        <!-- ถ้ามี submenu ให้เรียก recursive อีก -->
+        <app-breadcrumbs *ngIf="item.submenu?.length" [menus]="item.submenu"></app-breadcrumbs>
+    </li>
+</ul>

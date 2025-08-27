@@ -99,7 +99,7 @@ export class MainLayout {
 
   menus: any = {};
   openedMenu: any = null;
-  isDrawerOpen = false;
+  activeChain: any[] = [];
 
   constructor(public router: Router) {
     this.router.events.subscribe((event: any) => {
@@ -107,6 +107,8 @@ export class MainLayout {
         this.menus = this.menuItems.find(item =>
           event.urlAfterRedirects.startsWith(item.path)
         ) || {};
+
+        this.setActiveChain(event.url);
       }
     });
 
@@ -125,12 +127,31 @@ export class MainLayout {
     }
   }
 
-  toggleDrawer() {
-    this.isDrawerOpen = !this.isDrawerOpen;
+  setActiveChain(url: string) {
+    this.activeChain = this.findChain([this.menus], url) || [];
+
+    console.log(this.activeChain);
   }
 
-  closeDrawer() {
-    this.isDrawerOpen = false;
+  /**
+ * recursive หา chain ของเมนู
+ */
+  private findChain(menus: any[], url: string, parents: any[] = []): any[] | null {
+    for (const menu of menus) {
+      const newParents = [...parents, menu];
+
+      if (menu.path === url) {
+        return newParents;
+      }
+
+      if (menu.submenu?.length) {
+        const found = this.findChain(menu.submenu, url, newParents);
+        if (found) {
+          return found;
+        }
+      }
+    }
+    return null;
   }
 
   // ฟัง click ข้างนอก component

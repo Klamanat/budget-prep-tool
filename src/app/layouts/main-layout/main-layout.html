@@ -38,7 +38,9 @@
             <ul class="menu p-0 w-full">
                 <li *ngFor="let menu of menus.submenu" class="relative group w-full">
                     <!-- Parent menu -->
-                    <button class="w-full h-12 flex items-center justify-center gap-2 px-2" (click)="toggleMenu(menu)">
+                    <button
+                        class="w-full h-12 flex items-center justify-center gap-2 px-2 hover:bg-blue-100 active:!bg-blue-100 hover:text-blue-400"
+                        (click)="toggleMenu(menu)">
                         <app-icon [name]="menu.icon" size="25" [ariaLabel]="menu.title"></app-icon>
                     </button>
                     @if(isSidebarCollapsed && !openedMenu) {
@@ -56,8 +58,9 @@
              before:content-[''] before:absolute before:left-0 before:top-1/2 before:w-4
              before:border-t before:border-dashed before:border-blue-300
              after:content-[''] after:absolute after:left-0 after:top-0 after:bottom-0
-             after:border-l after:border-dashed after:border-blue-300" [ngClass]="{ 'after:bottom-1': last }">
-                            <span class="text-sm py-2">{{ child.title }}</span>
+             after:border-l after:border-dashed after:border-blue-300 hover:text-blue-400"
+                            [ngClass]="{ 'after:bottom-1': last }">
+                            <span class="text-sm py-2 hover:!bg-transparent">{{ child.title }}</span>
                         </li>
                     </ul>
                 </li>
@@ -77,6 +80,19 @@
                 <app-icon name="notification-bell" size="30" class="text-white"
                     ariaLabel="notification-bell"></app-icon>
                 <!-- Profile trigger -->
+                <div class="dropdown dropdown-end">
+                    <button tabindex="0"
+                        class="flex cursor-pointer items-center justify-center gap-2 border border-white text-white px-4 py-2 rounded-lg font-medium transition">
+                        <app-icon name="toggle" size="20" ariaLabel="toggle"></app-icon>
+                        <span class="text-sm font-medium">Administrator</span>
+                    </button>
+
+                    <ul tabindex="0" class="dropdown-content top-[52px] menu p-2 shadow bg-base-100 w-52 text-gray-700">
+                        <li><a class="hover:!bg-blue-100 hover:text-blue-400 text-sm font-normal">Role 1</a></li>
+                        <li><a class="hover:!bg-blue-100 hover:text-blue-400 text-sm font-normal">Role 2</a></li>
+                        <li><a class="hover:!bg-blue-100 hover:text-blue-400 text-sm font-normal">Role 3</a></li>
+                    </ul>
+                </div>
 
 
                 <div class="drawer-end">
@@ -92,6 +108,8 @@
                                         <p class="text-sm font-medium text-white">สมคิด พัฒนาอุตสาหกิจ</p>
                                         <p class="text-xs font-medium text-blue-200">ฝ่ายวางแผนและงบประมาณ</p>
                                     </div>
+                                    <app-icon name="chevron-down" size="20" class="text-white"
+                                        ariaLabel="chevron-down"></app-icon>
                                 </div>
                             </div>
                         </label>
@@ -134,13 +152,27 @@
         </div>
 
         <div class="px-8 py-4">
-            <div class="breadcrumbs text-sm">
-                <ul>
-                    <li><a>Home</a></li>
-                    <li><a>Documents</a></li>
-                    <li>Add Document</li>
-                </ul>
-            </div>
+            <!-- วนเฉพาะ chain -->
+            <ul class="mbreadcrumbs text-sm mb-2">
+                <ng-container *ngFor="let menu of activeChain; let last = last">
+                    <li class="text-[#01A6E6] text-sm font-normal">
+                        <a [href]="menu.path">
+                            {{ menu.title }}
+                        </a>
+
+                        <!-- ถ้ายังไม่ใช่ last ให้แสดง submenu ต่อ -->
+                        <ul *ngIf="!last && menu.submenu?.length" class="breadcrumbs text-sm">
+                            <ng-container *ngFor="let sub of menu.submenu">
+                                <li class="text-[#558598] text-sm font-normal">
+                                    <a>{{ sub.title }}</a>
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </li>
+                </ng-container>
+            </ul>
+
+
             <div class="px-4 py-6 bg-white rounded-md shadow-sm min-h-[calc(100vh-184px)]">
                 <router-outlet />
             </div>
