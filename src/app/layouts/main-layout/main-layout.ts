@@ -24,7 +24,7 @@ export class MainLayout {
       path: '/home',
       icon: 'home',
       submenu: [
-
+        { title: 'ข่าวประชาสัมพันธ์', icon: 'speaker-phone', path: '/home/announcements' },
       ]
     },
     {
@@ -105,6 +105,72 @@ export class MainLayout {
       path: '/cost-center-chain',
       icon: 'coins',
       submenu: [
+        {
+          title: 'รายงานงาน',
+          icon: 'report-gantt',
+          path: '/budget-year/report-task',
+          submenu: [
+            { title: 'รายงานงาน 1', path: '/budget-year/report-task/1' },
+            { title: 'รายงานงาน 2', path: '/budget-year/report-task/2' }
+          ]
+        },
+        {
+          title: 'บันทึกจัดสรร',
+          icon: 'archive-success-outline',
+          path: '/budget-year/allocation',
+          submenu: [
+            { title: 'บันทึกจัดสรร 1', path: '/budget-year/allocation/1' },
+            { title: 'บันทึกจัดสรร 2', path: '/budget-year/allocation/2' }
+          ]
+        },
+        {
+          title: 'จัดการAdhoc',
+          icon: 'task-time',
+          path: '/budget-year/adhoc',
+          submenu: [
+            { title: 'จัดการAdhoc 1', path: '/budget-year/adhoc/1' },
+            { title: 'จัดการAdhoc 2', path: '/budget-year/adhoc/2' }
+          ]
+        },
+        {
+          title: 'การจัดการข้อมูลผู้ใช้งาน',
+          icon: 'user-cog',
+          path: '/budget-year/user-management',
+          submenu: [
+            { title: 'การจัดการข้อมูลผู้ใช้งาน 1', path: '/budget-year/user-management/1' },
+            { title: 'การจัดการข้อมูลผู้ใช้งาน 2', path: '/budget-year/user-management/2' }
+          ]
+        },
+        {
+          title: 'การจัดการข้อมูล',
+          icon: 'report-gantt',
+          path: '/data-management',
+          submenu: [
+            { title: 'การจัดการหัวบัญชี', path: '/data-management/account-head' },
+            { title: 'จัดการ Mail Template', path: '/data-management/mail-template' },
+            { title: 'จัดการหน่วยงาน [Cost Center Chain]', path: '/data-management/cost-center-chain' },
+            { title: 'การจัดการ User PBD', path: '/data-management/user-pbd' },
+            { title: 'การจัดการงบวงเงิน', path: '/data-management/budget-management' }
+          ]
+        },
+        {
+          title: 'ข่าวประชาสัมพันธ์',
+          icon: 'speaker-phone',
+          path: '/news',
+          submenu: [
+            { title: 'ข่าวประชาสัมพันธ์ 1', path: '/news/1' },
+            { title: 'ข่าวประชาสัมพันธ์ 2', path: '/news/2' }
+          ]
+        },
+        {
+          title: 'รายงาน',
+          icon: 'bookmark-report',
+          path: '/report',
+          submenu: [
+            { title: 'รายงาน 1', path: '/report/1' },
+            { title: 'รายงาน 2', path: '/report/2' }
+          ]
+        }
       ]
     },
     {

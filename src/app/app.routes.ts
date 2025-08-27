@@ -21,5 +21,6 @@ export const routes: Routes = [
         path: 'admin',
         component: MainLayout,
         loadChildren: () => import('@views/admin/admin-module').then(m => m.AdminModule)
-    }
+    },
+    { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
