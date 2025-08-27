@@ -65,6 +65,27 @@ export class MainLayout {
           ]
         },
         {
+          title: 'การจัดการข้อมูล',
+          icon: 'report-gantt',
+          submenu: [
+            {
+              title: 'การจัดการหัวบัญชี',
+            },
+            {
+              title: 'จัดการ Mail Template',
+            },
+            {
+              title: 'จัดการหน่วยงาน [Cost Center Chain]',
+            },
+            {
+              title: 'การจัดการ User PBD',
+            },
+            {
+              title: 'การจัดการงบวงเงิน',
+            }
+          ]
+        },
+        {
           title: 'ข่าวประชาสัมพันธ์',
           icon: 'speaker-phone',
           submenu: [
@@ -93,7 +114,20 @@ export class MainLayout {
       title: 'การจัดการระบบ',
       path: '/user-pbd',
       icon: 'gui-management',
-      submenu: []
+      submenu: [
+        {
+          title: 'การจัดการ Role',
+          icon: 'user-cog'
+        },
+        {
+          title: 'การจัดการ เมนู',
+          icon: 'element-plus'
+        },
+        {
+          title: 'การจัดการ ผู้ใช้',
+          icon: 'team-member'
+        }
+      ]
     }
   ];
 

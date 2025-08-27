@@ -41,7 +41,7 @@
                     <button
                         class="w-full h-12 flex items-center justify-center gap-2 px-2 hover:bg-blue-100 active:!bg-blue-100 hover:text-blue-400"
                         (click)="toggleMenu(menu)">
-                        <app-icon [name]="menu.icon" size="25" [ariaLabel]="menu.title"></app-icon>
+                        <app-icon [name]="menu.icon ?? menus?.icon" size="25" [ariaLabel]="menu.title"></app-icon>
                     </button>
                     @if(isSidebarCollapsed && !openedMenu) {
                     <!-- Tooltip สำหรับ collapsed sidebar -->
@@ -51,18 +51,19 @@
                     </div>
                     }
 
+                    @if(menu?.submenu &&openedMenu === menu) {
                     <!-- Submenu แสดงใต้เมนู -->
-                    <ul *ngIf="openedMenu === menu"
-                        class="absolute left-0 top-full p-2 min-w-64 bg-white shadow rounded-md z-50">
+                    <ul class="absolute left-0 top-full p-2 min-w-64 bg-white shadow rounded-md z-50">
                         <li *ngFor="let child of menu.submenu; let last = last" class="relative pl-4 
-             before:content-[''] before:absolute before:left-0 before:top-1/2 before:w-4
-             before:border-t before:border-dashed before:border-blue-300
-             after:content-[''] after:absolute after:left-0 after:top-0 after:bottom-0
-             after:border-l after:border-dashed after:border-blue-300 hover:text-blue-400"
+                 before:content-[''] before:absolute before:left-0 before:top-1/2 before:w-4
+                 before:border-t before:border-dashed before:border-blue-300
+                 after:content-[''] after:absolute after:left-0 after:top-0 after:bottom-0
+                 after:border-l after:border-dashed after:border-blue-300 hover:text-blue-400"
                             [ngClass]="{ 'after:bottom-1': last }">
                             <span class="text-sm py-2 hover:!bg-transparent">{{ child.title }}</span>
                         </li>
                     </ul>
+                    }
                 </li>
             </ul>
         </div>
