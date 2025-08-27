@@ -10,7 +10,6 @@ import { Checkbox } from './checkbox/checkbox';
 import { Alert } from './alert/alert';
 import { Radio } from './radio/radio';
 import { MenuItem } from './menu-item/menu-item';
-import { Breadcrumbs } from './breadcrumbs/breadcrumbs';
 
 @NgModule({
   declarations: [],
@@ -26,8 +25,7 @@ import { Breadcrumbs } from './breadcrumbs/breadcrumbs';
     Alert,
     Radio,
     MenuItem,
-    Breadcrumbs
   ],
-  exports: [Button, Icon, Table, Select, InputComponent, Textarea, Checkbox, Alert, Radio, MenuItem, Breadcrumbs]
+  exports: [Button, Icon, Table, Select, InputComponent, Textarea, Checkbox, Alert, Radio, MenuItem]
 })
 export class ComponentsModule { }

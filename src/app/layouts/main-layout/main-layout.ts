@@ -21,7 +21,7 @@ export class MainLayout {
   menuItems = [
     {
       title: 'หน้าหลัก',
-      path: '/account-head',
+      path: '/home',
       icon: 'home',
       submenu: [
 
@@ -29,76 +29,73 @@ export class MainLayout {
     },
     {
       title: 'งบประมาณประจำปี',
-      path: '/mail-template',
+      path: '/budget-year',
       icon: 'start-year',
       submenu: [
         {
           title: 'รายงานงาน',
           icon: 'report-gantt',
+          path: '/budget-year/report-task',
           submenu: [
-            { title: 'รายงานงาน 1' },
-            { title: 'รายงานงาน 2' }
+            { title: 'รายงานงาน 1', path: '/budget-year/report-task/1' },
+            { title: 'รายงานงาน 2', path: '/budget-year/report-task/2' }
           ]
         },
         {
           title: 'บันทึกจัดสรร',
           icon: 'archive-success-outline',
+          path: '/budget-year/allocation',
           submenu: [
-            { title: 'บันทึกจัดสรร 1' },
-            { title: 'บันทึกจัดสรร 2' }
+            { title: 'บันทึกจัดสรร 1', path: '/budget-year/allocation/1' },
+            { title: 'บันทึกจัดสรร 2', path: '/budget-year/allocation/2' }
           ]
         },
         {
           title: 'จัดการAdhoc',
           icon: 'task-time',
+          path: '/budget-year/adhoc',
           submenu: [
-            { title: 'จัดการAdhoc 1' },
-            { title: 'จัดการAdhoc 2' }
+            { title: 'จัดการAdhoc 1', path: '/budget-year/adhoc/1' },
+            { title: 'จัดการAdhoc 2', path: '/budget-year/adhoc/2' }
           ]
         },
         {
           title: 'การจัดการข้อมูลผู้ใช้งาน',
           icon: 'user-cog',
+          path: '/budget-year/user-management',
           submenu: [
-            { title: 'การจัดการข้อมูลผู้ใช้งาน 1' },
-            { title: 'การจัดการข้อมูลผู้ใช้งาน 2' }
+            { title: 'การจัดการข้อมูลผู้ใช้งาน 1', path: '/budget-year/user-management/1' },
+            { title: 'การจัดการข้อมูลผู้ใช้งาน 2', path: '/budget-year/user-management/2' }
           ]
         },
         {
           title: 'การจัดการข้อมูล',
           icon: 'report-gantt',
+          path: '/data-management',
           submenu: [
-            {
-              title: 'การจัดการหัวบัญชี',
-            },
-            {
-              title: 'จัดการ Mail Template',
-            },
-            {
-              title: 'จัดการหน่วยงาน [Cost Center Chain]',
-            },
-            {
-              title: 'การจัดการ User PBD',
-            },
-            {
-              title: 'การจัดการงบวงเงิน',
-            }
+            { title: 'การจัดการหัวบัญชี', path: '/data-management/account-head' },
+            { title: 'จัดการ Mail Template', path: '/data-management/mail-template' },
+            { title: 'จัดการหน่วยงาน [Cost Center Chain]', path: '/data-management/cost-center-chain' },
+            { title: 'การจัดการ User PBD', path: '/data-management/user-pbd' },
+            { title: 'การจัดการงบวงเงิน', path: '/data-management/budget-management' }
           ]
         },
         {
           title: 'ข่าวประชาสัมพันธ์',
           icon: 'speaker-phone',
+          path: '/news',
           submenu: [
-            { title: 'ข่าวประชาสัมพันธ์ 1' },
-            { title: 'ข่าวประชาสัมพันธ์ 2' }
+            { title: 'ข่าวประชาสัมพันธ์ 1', path: '/news/1' },
+            { title: 'ข่าวประชาสัมพันธ์ 2', path: '/news/2' }
           ]
         },
         {
           title: 'รายงาน',
           icon: 'bookmark-report',
+          path: '/report',
           submenu: [
-            { title: 'รายงาน 1' },
-            { title: 'รายงาน 2' }
+            { title: 'รายงาน 1', path: '/report/1' },
+            { title: 'รายงาน 2', path: '/report/2' }
           ]
         }
       ]
@@ -112,16 +109,18 @@ export class MainLayout {
     },
     {
       title: 'การจัดการระบบ',
-      path: '/user-pbd',
+      path: '/admin',
       icon: 'gui-management',
       submenu: [
         {
           title: 'การจัดการ Role',
-          icon: 'user-cog'
+          icon: 'user-cog',
+          path: '/admin/roles'
         },
         {
           title: 'การจัดการ เมนู',
-          icon: 'element-plus'
+          icon: 'element-plus',
+          path: '/admin/menus'
         },
         {
           title: 'การจัดการ ผู้ใช้',
@@ -163,8 +162,6 @@ export class MainLayout {
 
   setActiveChain(url: string) {
     this.activeChain = this.findChain([this.menus], url) || [];
-
-    console.log(this.activeChain);
   }
 
   /**

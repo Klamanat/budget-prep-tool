@@ -1,14 +1,104 @@
-<div class="overflow-x-auto">
+<div class="overflow-x-auto pt-2">
   <table class="table w-full">
     <thead>
-      <tr>
-        <th *ngFor="let header of headers">{{header}}</th>
+      <tr class="h-12 text-blue-100 cursor-pointer text-center">
+        <!-- Checkbox / Radio Column -->
+        <th *ngIf="selectionType" class="bg-blue-400 border border-blue-300 py-1 px-3 w-12">
+          <input *ngIf="selectionType === 'checkbox'" type="checkbox" #chkAll (change)="toggleAll(chkAll.checked)"
+            [checked]="allSelected()" class="w-3.5 h-3.5" />
+        </th>
+
+        <!-- Original headers -->
+        <th *ngFor="let header of headers" class="bg-blue-400 border border-blue-300 py-1 px-3"
+          [attr.width]="header?.width">
+          {{ header?.title }}
+        </th>
       </tr>
     </thead>
+
     <tbody>
-      <tr *ngFor="let row of rows">
-        <td *ngFor="let cell of row">{{cell}}</td>
+      <tr *ngFor="let row of data" class="h-[40px] hover:bg-blue-100 cursor-pointer text-gray-700">
+        <!-- Checkbox / Radio Cell -->
+        <td *ngIf="selectionType" class="border border-blue-300 px-3 py-0 text-center">
+          <input *ngIf="selectionType === 'checkbox'" type="checkbox" [(ngModel)]="row.selected"
+            (change)="onSelectionChange(row)" class="w-3.5 h-3.5" />
+          <input *ngIf="selectionType === 'radio'" type="radio" name="rowSelection" [(ngModel)]="selectedRow"
+            [value]="row" (change)="onSelectionChange(row)" class="w-3.5 h-3.5" />
+        </td>
+
+        <!-- Original data cells -->
+        <td *ngFor="let header of headers" class="border border-blue-300 px-3 py-0 text-center"
+          [ngClass]="header?.align ? 'text-' + header.align : ''">
+          <ng-container *ngIf="header.slot; then templateBlock; else defaultBlock"></ng-container>
+
+          <ng-template #templateBlock>
+            <ng-container [ngTemplateOutlet]="header.slot"
+              [ngTemplateOutletContext]="{ $implicit: row }"></ng-container>
+          </ng-template>
+
+          <ng-template #defaultBlock>
+            {{ row[header?.key] }}
+          </ng-template>
+        </td>
       </tr>
     </tbody>
   </table>
+
+  @if(totalItems) {
+  <!-- Pagination Controls -->
+  <div class="py-4 flex justify-between items-center">
+    <p class="text-gray-700 text-sm font-normal">รายการทั้งหมด {{ totalItems }} รายการ</p>
+
+    <div class="flex items-center gap-2">
+      <p class="text-gray-700 text-sm font-normal">แสดง</p>
+      <select class="select select-sm">
+        <option>5</option>
+        <option>10</option>
+        <option>15</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="flex justify-center items-center">
+    <div class="join gap-2">
+      <!-- ไปหน้าแรก << -->
+      <button class="join-item btn btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 19l-7-7 7-7M12 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <!-- ย้อนกลับ < -->
+      <button class="join-item btn btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <button class="join-item btn btn-sm">1</button>
+
+      <!-- ถัดไป > -->
+      <button class="join-item btn btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <!-- ไปหน้าสุดท้าย >> -->
+      <button class="join-item btn btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5l7 7-7 7M12 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+  }
+  @else {
+  <div class="h-80 flex flex-col justify-center items-center text-gray-400">
+    <div class="flex items-center gap-2">
+      <app-icon name="circle" size="24" />
+      <span>ยังไม่มีรายการ</span>
+    </div>
+  </div>
+  }
 </div>

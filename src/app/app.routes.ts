@@ -3,79 +3,23 @@ import { MainLayout } from '@layouts/main-layout/main-layout';
 
 export const routes: Routes = [
     {
-        path: '',
-        redirectTo: '/user-pbd',
-        pathMatch: 'full'
-    },
-    {
         path: 'home',
         component: MainLayout,
-        children: [
-            {
-                path: '',
-                loadChildren: () => import('@views/home/home-module').then(m => m.HomeModule)
-            }
-        ]
+        loadChildren: () => import('@views/home/home-module').then(m => m.HomeModule)
     },
     {
-        path: 'report',
+        path: 'budget-year',
         component: MainLayout,
-        children: [
-            {
-                path: '',
-                loadChildren: () => import('@views/report/report-module').then(m => m.ReportModule)
-            }
-        ]
-    }
-    ,
-    {
-        path: 'account-head',
-        component: MainLayout,
-        children: [
-            {
-                path: '',
-                loadChildren: () => import('@views/account-head/account-head-module').then(m => m.AccountHeadModule)
-            },
-        ]
-    },
-    {
-        path: 'mail-template',
-        component: MainLayout,
-        children: [
-            {
-                path: '',
-                loadChildren: () => import('@views/mail-template/mail-template-module').then(m => m.MailTemplateModule)
-            },
-        ]
+        loadChildren: () => import('@views/budget-year/budget-year-module').then(m => m.BudgetYearModule)
     },
     {
         path: 'cost-center-chain',
         component: MainLayout,
-        children: [
-            {
-                path: '',
-                loadChildren: () => import('@views/cost-center-chain/cost-center-chain-module').then(m => m.CostCenterChainModule)
-            },
-        ]
+        loadChildren: () => import('@views/cost-center-chain/cost-center-chain-module').then(m => m.CostCenterChainModule)
     },
     {
-        path: 'user-pbd',
+        path: 'admin',
         component: MainLayout,
-        children: [
-            {
-                path: '',
-                loadChildren: () => import('@views/user-pbd/user-pbd-module').then(m => m.UserPBDModule)
-            },
-        ]
-    },
-    {
-        path: 'budget-management',
-        component: MainLayout,
-        children: [
-            {
-                path: '',
-                loadChildren: () => import('@views/budget-management/budget-management-module').then(m => m.BudgetManagementModule)
-            },
-        ]
+        loadChildren: () => import('@views/admin/admin-module').then(m => m.AdminModule)
     }
 ];

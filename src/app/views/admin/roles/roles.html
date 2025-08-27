@@ -1,0 +1,39 @@
+<div class="grid grid-cols-12 gap-4">
+    <div class="col-span-4">
+        <app-input />
+    </div>
+    <div class="col-span-1">
+        <app-button>
+            <app-icon name="search" size="20"></app-icon>
+            ค้นหา
+        </app-button>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="grid grid-cols-12 gap-4">
+    <div class="col-span-12 space-x-4 justify-end flex">
+        <app-button color="danger" [disabled]="selectedRole.length === 0">
+            <app-icon name="bin" size="20"></app-icon>
+            ลบ
+        </app-button>
+        <app-button>
+            <app-icon name="search" size="20"></app-icon>
+            เพิ่ม Role
+        </app-button>
+    </div>
+</div>
+
+<div class="grid grid-cols-12">
+    <div class="col-span-12">
+        <app-table [headers]="headers" [data]="data" [selectionType]="'checkbox'"
+            (selectionChange)="onSelectionChange($event)" [totalItems]="data.length" />
+    </div>
+</div>
+
+<ng-template #actions let-row>
+    <app-button size="sm">
+        <app-icon name="edit" size="18"></app-icon>
+    </app-button>
+</ng-template>
