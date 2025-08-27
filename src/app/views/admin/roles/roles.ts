@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentsModule } from '@shared/components/components-module';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-roles',
   imports: [CommonModule, ComponentsModule],
@@ -10,6 +12,8 @@ import { ComponentsModule } from '@shared/components/components-module';
 })
 export class Roles implements AfterViewInit {
   @ViewChild('actions', { static: true }) actions!: TemplateRef<any>;
+
+  constructor(private router: Router) { }
 
   headers: any[] = [];
   selectedRole: any[] = []
@@ -51,6 +55,7 @@ export class Roles implements AfterViewInit {
 
   data: any[] = [
     {
+      id: '1',
       name: 'Admin',
       description: 'Administrator role',
       createdAt: '2023-01-01',
@@ -58,6 +63,7 @@ export class Roles implements AfterViewInit {
       actions: 'Edit'
     },
     {
+      id: '2',
       name: 'User',
       description: 'Standard user role',
       createdAt: '2023-01-01',
@@ -68,5 +74,13 @@ export class Roles implements AfterViewInit {
 
   onSelectionChange(selected: any) {
     this.selectedRole = selected;
+  }
+
+  onEdit(row: any) {
+    this.router.navigate(['/admin/roles/edit', row.id]);
+  }
+
+  onCreate() {
+    this.router.navigate(['/admin/roles/create']);
   }
 }

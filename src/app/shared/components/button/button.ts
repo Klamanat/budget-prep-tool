@@ -10,7 +10,7 @@ import { Component, Input } from '@angular/core';
 export class Button {
   @Input() disabled: boolean = false;
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
-  @Input() color: 'primary' | 'info' | 'warning' | 'danger' = 'primary';
+  @Input() color: 'primary' | 'info' | 'warning' | 'danger' | '' = '';
 
   getSizeClass(): string {
     switch (this.size) {
@@ -32,7 +32,7 @@ export class Button {
       case 'danger':
         return 'btn bg-red-500 text-white';
       default:
-        return 'btn';
+        return 'btn bg-white text-gray-700';
     }
   }
 }

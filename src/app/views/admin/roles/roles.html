@@ -3,7 +3,7 @@
         <app-input />
     </div>
     <div class="col-span-1">
-        <app-button>
+        <app-button color="primary">
             <app-icon name="search" size="20"></app-icon>
             ค้นหา
         </app-button>
@@ -18,7 +18,7 @@
             <app-icon name="bin" size="20"></app-icon>
             ลบ
         </app-button>
-        <app-button>
+        <app-button color="primary" (click)="onCreate()">
             <app-icon name="search" size="20"></app-icon>
             เพิ่ม Role
         </app-button>
@@ -33,7 +33,7 @@
 </div>
 
 <ng-template #actions let-row>
-    <app-button size="sm">
-        <app-icon name="edit" size="18"></app-icon>
+    <app-button color="primary" size="sm">
+        <app-icon name="edit" size="18" (click)="onEdit(row)"></app-icon>
     </app-button>
 </ng-template>
