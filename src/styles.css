@@ -36,6 +36,10 @@ body {
   --color-green-500: #4BB543;
   --color-green-600: #006D23;
   --color-green-700: #3A8D3A;
+
+  --color-orange-200: #FDE5C0;
+  --color-orange-500: #FF9500;
+  --color-orange-600: #B12D00;
 }
 
 .menu :where(li ul):before {

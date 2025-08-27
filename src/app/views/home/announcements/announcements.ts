@@ -11,7 +11,7 @@ import { ComponentsModule } from "@shared/components/components-module";
 export class Announcements {
   announcements = [
     { title: 'แจ้ง update รายการมาใหม่น่าสนใจมากๆ', link: '#', topic: 'ข่าว', color: 'bg-green-200 text-green-600' },
-    { title: 'แจ้ง update รายการมาใหม่น่าสนใจมากๆ', link: '#', topic: 'แจ้งเตือน', color: 'bg-red-200 text-red-600' },
+    { title: 'แจ้ง update รายการมาใหม่น่าสนใจมากๆ', link: '#', topic: 'แจ้งเตือน', color: 'bg-orange-200 text-orange-600' },
     { title: 'แจ้ง update รายการมาใหม่น่าสนใจมากๆ', link: '#', topic: 'ข่าว', color: 'bg-green-200 text-green-600' },
     { title: 'แจ้ง update รายการมาใหม่น่าสนใจมากๆ', link: '#', topic: 'ข่าว', color: 'bg-green-200 text-green-600' }
   ];
