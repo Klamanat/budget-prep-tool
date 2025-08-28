@@ -1,6 +1,6 @@
-<div class="h-full flex bg-gray-100">
+<div class="min-h-screen flex flex-col md:flex-row bg-gray-100">
     <div [ngClass]="isSidebarCollapsed ? 'w-[60px]' : 'w-[300px]'"
-        class="transition-all duration-300 shadow-md bg-white overflow-visible">
+        class="transition-all duration-300 shadow-md bg-white overflow-visible hidden lg:block">
         <div class="h-[68px] bg-[#00A6E6]">
             <div class="flex items-center justify-center h-full">
                 <img [src]="isSidebarCollapsed ? 'assets/images/ktb_logo_crop.png' : 'assets/images/ktb_logo_1.png'"
@@ -72,10 +72,33 @@
         }
     </div>
     <div class="flex-1">
-        <div class="flex px-6 items-center bg-gradient-to-r from-[#00A6E6] to-[#007BAA] h-[68px]">
+        <div class="flex px-2 lg:px-6 items-center bg-gradient-to-r from-[#00A6E6] to-[#007BAA] h-[68px]">
             <div class="flex w-64 justify-between items-center">
+                <div class="pl-2 lg:hidden drawer-start">
+                    <input id="drawer-menu" type="checkbox" class="drawer-toggle" />
+                    <div class="">
+                        <!-- Page content here -->
+                        <label for="drawer-menu">
+                            <svg data-v-608ec4a3="" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
+                                class="w-7 h-7 text-white">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"></path>
+                            </svg>
+                        </label>
+                    </div>
+                    <div class="drawer-side">
+                        <label for="drawer-menu" aria-label="close sidebar" class="drawer-overlay"></label>
+                        <div class="bg-white text-base-content min-h-full w-80 py-8">
+                            <ul class="menu menu-md rounded-box w-full p-0">
+                                <app-menu-item *ngFor="let menu of menuItems" [menu]="menu" [isParent]="true">
+                                </app-menu-item>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <div>
-                    <p class="text-white text-2xl font-bold">Budget Prep. Tool</p>
+                    <p class="text-white text-2xl font-bold lg:pl-0 pl-2">Budget Prep. Tool</p>
                 </div>
             </div>
             <div class="flex-1 flex justify-end gap-4 items-center px-2">
@@ -98,15 +121,15 @@
 
 
                 <div class="drawer-end">
-                    <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+                    <input id="drawer-profile" type="checkbox" class="drawer-toggle" />
                     <div class="">
                         <!-- Page content here -->
-                        <label for="my-drawer-4" class="">
+                        <label for="drawer-profile" class="">
                             <div class="dropdown dropdown-end cursor-pointer rounded-lg bg-white/20 p-2">
                                 <div class="flex items-center gap-2" tabindex="0">
                                     <app-icon name="profile" size="35" class="text-white"
                                         ariaLabel="profile"></app-icon>
-                                    <div>
+                                    <div class="hidden lg:block">
                                         <p class="text-sm font-medium text-white">สมคิด พัฒนาอุตสาหกิจ</p>
                                         <p class="text-xs font-medium text-blue-200">ฝ่ายวางแผนและงบประมาณ</p>
                                     </div>
@@ -117,7 +140,7 @@
                         </label>
                     </div>
                     <div class="drawer-side">
-                        <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+                        <label for="drawer-profile" aria-label="close sidebar" class="drawer-overlay"></label>
                         <div class="bg-white text-base-content min-h-full w-80 px-4 py-8">
                             <div class="space-y-1">
                                 <p class="text-sm font-semibold text-[#1B273A]">ข้อมูลผู้ใช้</p>
@@ -140,15 +163,16 @@
             </div>
         </div>
 
-
-        <div class="h-10 bg-white shadow-md">
-            <ul class="flex items-center px-8 h-full">
-                <li *ngFor="let item of menuItems; let i = index" class="py-2 px-6 flex items-center gap-0.5">
+        <div class="h-10 bg-white shadow-md overflow-x-auto hidden lg:flex">
+            <ul class="flex items-center px-4 md:px-8 h-full w-max whitespace-nowrap">
+                <li *ngFor="let item of menuItems; let i = index"
+                    class="py-2 px-4 md:px-6 flex items-center gap-1 flex-shrink-0">
                     <app-icon [name]="item.icon" size="20"
                         [ngClass]="isActive(item.path) ? 'text-blue-400' : 'text-gray-700'"
                         [ariaLabel]="item.title"></app-icon>
-                    <a class="text-sm font-medium" [ngClass]="isActive(item.path) ? 'text-blue-400' : 'text-gray-700'"
-                        [routerLink]="item.path">{{ item.title }}</a>
+                    <a class="text-sm font-medium truncate"
+                        [ngClass]="isActive(item.path) ? 'text-blue-400' : 'text-gray-700'" [routerLink]="item.path">{{
+                        item.title }}</a>
                 </li>
             </ul>
         </div>
