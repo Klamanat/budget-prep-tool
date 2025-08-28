@@ -26,7 +26,11 @@
             ],
             "styles": [
               "src/styles.css"
-            ]
+            ],
+            "outputPath": "budget-prep-tool/browser",
+            "baseHref": "/budget-prep-tool/",
+            "deployUrl": "/budget-prep-tool/",
+            "outputMode": "static"
           },
           "configurations": {
             "production": {

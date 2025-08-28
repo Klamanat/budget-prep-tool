@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+        {
+            "source": "/budget-prep-tool/(.*)",
+            "destination": "/budget-prep-tool/index.html"
+        }
+    ]
+}

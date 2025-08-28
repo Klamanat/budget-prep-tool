@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ComponentsModule } from '../components-module';
+import { Icon } from '../icon/icon';
 
 @Component({
   selector: 'app-table',
   standalone: true,
   templateUrl: './table.html',
   styleUrls: ['./table.css'],
-  imports: [CommonModule, FormsModule, ComponentsModule]
+  imports: [CommonModule, FormsModule, Icon]
 })
 export class Table {
   @Input() headers: any[] = [];
