@@ -16,12 +16,10 @@
 
     <div class="grid grid-cols-12 gap-4">
         <div class="col-span-12 space-x-4 justify-end flex">
-            <app-button color="danger" [disabled]="selectedRole.length === 0">
-                <app-icon name="bin" size="20"></app-icon>
+            <app-button color="danger" [disabled]="selectedRole.length === 0" iconLeft="bin">
                 ลบ
             </app-button>
-            <app-button color="primary" (click)="onCreate()">
-                <app-icon name="search" size="20"></app-icon>
+            <app-button color="primary" iconLeft="plus" (click)="onCreate()">
                 เพิ่ม Role
             </app-button>
         </div>
