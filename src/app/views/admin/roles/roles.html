@@ -1,16 +1,16 @@
 <div class="px-4 py-6 bg-white rounded-md shadow-sm ">
-
-    <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-4">
-            <app-input />
-        </div>
-        <div class="col-span-1">
-            <app-button color="primary">
-                <app-icon name="search" size="20"></app-icon>
-                ค้นหา
-            </app-button>
-        </div>
-    </div>
+    <app-row [gap]="4">
+        <app-col [sm]="6" [lg]="4">
+            <div class="flex gap-2">
+                <div class="flex-1">
+                    <app-input />
+                </div>
+                <app-button color="primary" iconLeft="search">
+                    ค้นหา
+                </app-button>
+            </div>
+        </app-col>
+    </app-row>
 
     <div class="divider"></div>
 
