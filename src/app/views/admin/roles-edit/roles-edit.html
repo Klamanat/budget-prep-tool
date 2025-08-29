@@ -56,32 +56,10 @@
 
             <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 w-52 text-gray-700">
                 <li>
-                    <label class="label text-gray-700 text-sm font-semibold">
-                        <input type="checkbox" checked="checked"
-                            class="checkbox checkbox-xs rounded-sm checked:bg-blue-600 checked:text-white" />
-                        ทั้งหมด
-                    </label>
+                    <app-checkbox [label]="'ทั้งหมด'"></app-checkbox>
                 </li>
-                <li>
-                    <label class="label text-gray-700 text-sm font-semibold">
-                        <input type="checkbox" checked="checked"
-                            class="checkbox checkbox-xs rounded-sm checked:bg-blue-600 checked:text-white" />
-                        1. หน้าหลัก
-                    </label>
-                </li>
-                <li>
-                    <label class="label text-gray-700 text-sm font-semibold">
-                        <input type="checkbox" checked="checked"
-                            class="checkbox checkbox-xs rounded-sm checked:bg-blue-600 checked:text-white" />
-                        2. งบประจำปี
-                    </label>
-                </li>
-                <li>
-                    <label class="label text-gray-700 text-sm font-semibold">
-                        <input type="checkbox" checked="checked"
-                            class="checkbox checkbox-xs rounded-sm checked:bg-blue-600 checked:text-white" />
-                        3. งบระหว่างปี
-                    </label>
+                <li *ngFor="let menu of menus">
+                    <app-checkbox [label]="menu.name"></app-checkbox>
                 </li>
             </ul>
         </div>
@@ -92,11 +70,7 @@
             <li *ngFor="let menu of menus" class="flex gap-2 items-center border-b border-gray-200 py-2">
                 <app-icon name="chevron-down" size="20" class="text-gray-700" ariaLabel="chevron-down"></app-icon>
                 <div class="flex flex-col ">
-                    <label class="label text-gray-700 text-sm font-semibold">
-                        <input type="checkbox" checked="checked"
-                            class="checkbox checkbox-xs rounded-sm checked:bg-blue-600 checked:text-white" />
-                        {{ menu.name }}
-                    </label>
+                    <app-checkbox [label]="menu.name"></app-checkbox>
                     <p class="text-xs font-normal text-gray-500">menu id: {{ menu.id }}</p>
                 </div>
             </li>

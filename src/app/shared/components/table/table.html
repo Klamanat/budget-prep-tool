@@ -1,10 +1,12 @@
 <table class="table w-full">
   <thead>
     <tr class="h-12 text-blue-100 cursor-pointer text-center">
-      <th *ngIf="selectionType" class="bg-blue-400 border border-blue-300 py-1 px-3 w-12">
-        <input *ngIf="selectionType === 'checkbox'" type="checkbox" #chkAll (change)="toggleAll(chkAll.checked)"
-          [checked]="allSelected()" class="w-3.5 h-3.5" />
+      @if(selectionType) {
+      <th class="bg-blue-400 border border-blue-300 py-1 px-3 w-12">
+        <app-checkbox #chkAll [(ngModel)]="allSelectedValue" (checkedChange)="toggleAll($event)"
+          class="w-3.5 h-3.5"></app-checkbox>
       </th>
+      }
 
       <th *ngFor="let header of headers" class="bg-blue-400 border border-blue-300 py-1 px-3"
         [attr.width]="header?.width">
@@ -15,12 +17,18 @@
 
   <tbody>
     <tr *ngFor="let row of data" class="h-[40px] hover:bg-blue-100 cursor-pointer text-gray-700">
-      <td *ngIf="selectionType" class="border border-blue-300 px-3 py-0 text-center">
-        <input *ngIf="selectionType === 'checkbox'" type="checkbox" [(ngModel)]="row.selected"
+      @if(selectionType) {
+      <td class="border border-blue-300 px-3 py-0 text-center">
+        @if(selectionType === 'checkbox') {
+        <app-checkbox [(ngModel)]="row.selected" (checkedChange)="onSelectionChange(row)"
+          class="w-3.5 h-3.5"></app-checkbox>
+        }
+        @if(selectionType === 'radio') {
+        <input type="radio" name="rowSelection" [(ngModel)]="selectedRow" [value]="row"
           (change)="onSelectionChange(row)" class="w-3.5 h-3.5" />
-        <input *ngIf="selectionType === 'radio'" type="radio" name="rowSelection" [(ngModel)]="selectedRow"
-          [value]="row" (change)="onSelectionChange(row)" class="w-3.5 h-3.5" />
+        }
       </td>
+      }
 
       <td *ngFor="let header of headers" class="border border-blue-300 px-3 py-0 text-center"
         [ngClass]="header?.align ? 'text-' + header.align : ''">

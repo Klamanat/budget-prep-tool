@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Icon } from '../icon/icon';
+import { Checkbox } from "../checkbox/checkbox";
 
 export interface TableHeader {
   title: string;
@@ -16,7 +17,7 @@ export interface TableHeader {
   standalone: true,
   templateUrl: './table.html',
   styleUrls: ['./table.css'],
-  imports: [CommonModule, FormsModule, Icon],
+  imports: [CommonModule, FormsModule, Icon, Checkbox],
   host: { class: 'overflow-x-auto pt-2 block w-full' }
 })
 export class Table {
@@ -33,6 +34,16 @@ export class Table {
   selectedRow: any = null;
   currentPage = 1; // หน้าเริ่มต้น
 
+  allSelectedValue = false;
+
+  ngAfterViewInit() {
+    this.updateAllSelectedValue();
+  }
+
+  updateAllSelectedValue() {
+    this.allSelectedValue = this.data && this.data.every(row => row.selected);
+  }
+
   // Toggle all rows (checkbox)
   toggleAll(checked: boolean) {
     if (!this.selectionType) return;
@@ -46,6 +57,7 @@ export class Table {
       this.selectedRow = row;
       this.selectionChange.emit(row);
     } else if (this.selectionType === 'checkbox') {
+      this.updateAllSelectedValue(); // update state checkbox Check All
       this.selectionChange.emit(this.getSelectedRows());
     }
   }

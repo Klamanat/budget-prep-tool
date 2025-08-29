@@ -24,6 +24,7 @@ export class Button {
   @Input() color: 'primary' | 'info' | 'warning' | 'danger' | '' = '';
   @Input() rounded: 'none' | 'sm' | 'md' | 'lg' | 'full' = 'md';
   @Input() fullWidth: boolean = false;
+  @Input() outline: boolean = false;
   @Input() iconLeft?: string;
   @Input() iconRight?: string;
 
@@ -37,13 +38,23 @@ export class Button {
       case 'lg': classes.push('px-6 py-3 text-lg'); break;
     }
 
-    // color
-    switch (this.color) {
-      case 'primary': classes.push('bg-blue-400 text-white hover:bg-blue-500'); break;
-      case 'info': classes.push('bg-cyan-400 text-white hover:bg-cyan-500'); break;
-      case 'warning': classes.push('bg-yellow-400 text-white hover:bg-yellow-500'); break;
-      case 'danger': classes.push('bg-red-500 text-white hover:bg-red-600'); break;
-      default: classes.push('bg-white text-gray-700 hover:bg-gray-100'); break;
+    // color + outline
+    if (this.outline) {
+      switch (this.color) {
+        case 'primary': classes.push('border border-blue-400 text-blue-400'); break;
+        case 'info': classes.push('border border-cyan-400 text-cyan-400'); break;
+        case 'warning': classes.push('border border-yellow-400 text-yellow-500'); break;
+        case 'danger': classes.push('border border-red-500 text-red-500'); break;
+        default: classes.push('border border-white text-white'); break;
+      }
+    } else {
+      switch (this.color) {
+        case 'primary': classes.push('bg-blue-400 text-white hover:bg-blue-500'); break;
+        case 'info': classes.push('bg-cyan-400 text-white hover:bg-cyan-500'); break;
+        case 'warning': classes.push('bg-yellow-400 text-white hover:bg-yellow-500'); break;
+        case 'danger': classes.push('bg-red-500 text-white hover:bg-red-600'); break;
+        default: classes.push('bg-white text-gray-700 hover:bg-gray-100'); break;
+      }
     }
 
     // rounded
