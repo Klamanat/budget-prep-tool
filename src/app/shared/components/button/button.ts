@@ -53,7 +53,7 @@ export class Button {
         case 'info': classes.push('bg-cyan-400 text-white hover:bg-cyan-500'); break;
         case 'warning': classes.push('bg-yellow-400 text-white hover:bg-yellow-500'); break;
         case 'danger': classes.push('bg-red-500 text-white hover:bg-red-600'); break;
-        default: classes.push('bg-white text-gray-700 hover:bg-gray-100'); break;
+        default: classes.push('border border-gray-300 bg-white text-gray-700 hover:bg-gray-100'); break;
       }
     }
 

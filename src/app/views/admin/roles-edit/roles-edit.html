@@ -1,49 +1,43 @@
 <div class="px-4 py-6 bg-white rounded-md shadow-sm">
-    <div class="grid grid-cols-1 gap-4 pb-2">
-        <div class="py-1 px-2 bg-blue-700 text-base font-semibold text-white">
-            Role Detail
-        </div>
-    </div>
-    <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-6">
-            <fieldset class="fieldset">
-                <legend class="fieldset-legend">Role name</legend>
-                <textarea class="textarea h-24 focus:outline-none focus:ring-0 w-full"
-                    placeholder="กรุณาระบุ"></textarea>
-            </fieldset>
-        </div>
-        <div class="col-span-6">
-            <fieldset class="fieldset">
-                <legend class="fieldset-legend">Role Description</legend>
-                <textarea class="textarea h-24 focus:outline-none focus:ring-0 w-full"
-                    placeholder="กรุณาระบุ"></textarea>
-            </fieldset>
-        </div>
-    </div>
+    <app-row [gap]="4">
+        <app-col [span]="12">
+            <div class="py-1 px-2 bg-blue-700 text-base font-semibold text-white">
+                Role Detail
+            </div>
+        </app-col>
+    </app-row>
+
+    <app-row [gap]="4" class="mb-2">
+        <app-col [md]="12" [lg]="6">
+            <app-textarea label="Role name" placeholder="กรุณาระบุ" [required]="true"></app-textarea>
+        </app-col>
+        <app-col [md]="12" [lg]="6">
+            <app-textarea label="Role Description" placeholder="กรุณาระบุ"></app-textarea>
+        </app-col>
+    </app-row>
+
     <div class="grid grid-cols-1 gap-4 py-2">
         <div class="py-1 px-2 bg-blue-700 text-base font-semibold text-white">
             Role Menu
         </div>
     </div>
 
-    <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-6">
-            <fieldset class="fieldset">
-                <legend class="fieldset-legend">ค้นหา Menu title</legend>
-                <div class="grid grid-cols-12 gap-4 mb-4">
-                    <div class="col-span-10">
-                        <app-input />
-                    </div>
-                    <div class="col-span-2">
-                        <app-button color="primary">
-                            <app-icon name="search" size="20"></app-icon>
-                            ค้นหา
-                        </app-button>
-                    </div>
+    <br />
+
+    <app-row [gap]="4">
+        <app-col [sm]="6" [lg]="4">
+            <div class="flex gap-2">
+                <div class="flex-1">
+                    <app-input />
                 </div>
-            </fieldset>
-        </div>
-    </div>
+                <app-button color="primary" iconLeft="search">
+                    ค้นหา
+                </app-button>
+            </div>
+        </app-col>
+    </app-row>
+
+    <br />
 
     <div class="flex items-center gap-4">
         <p class="text-gray-700 font-semibold">รายการ เมนู</p>
