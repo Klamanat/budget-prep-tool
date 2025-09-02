@@ -90,12 +90,15 @@ body {
 
   --color-red-500: #DA294A;
 
+  --color-green-100: #EAF9E8;
   --color-green-200: #CDF3C6;
-  --color-green-500: #4BB543;
+  --color-green-500: #008539;
   --color-green-600: #006D23;
   --color-green-700: #3A8D3A;
 
   --color-orange-200: #FDE5C0;
+  --color-orange-300: #FBBF8C;
+  --color-orange-400: #F07F23;
   --color-orange-500: #FF9500;
   --color-orange-600: #B12D00;
 }

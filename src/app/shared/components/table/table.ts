@@ -6,14 +6,14 @@ import { Checkbox } from "../checkbox/checkbox";
 import { Select } from '../select/select';
 import { ISelectOption } from '@shared/interfaces/ISelectOption';
 import { ITableHeader } from '@shared/interfaces/ITableHeader';
-import { ComponentsModule } from "../components-module";
+import { Radio } from '../radio/radio';
 
 @Component({
   selector: 'app-table',
   standalone: true,
   templateUrl: './table.html',
   styleUrls: ['./table.css'],
-  imports: [CommonModule, FormsModule, Icon, Checkbox, Select, ComponentsModule],
+  imports: [CommonModule, FormsModule, Icon, Checkbox, Select, Radio],
   host: { class: 'overflow-x-auto pt-2 block w-full' }
 })
 export class Table implements OnInit {

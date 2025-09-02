@@ -31,7 +31,7 @@ import { Icon } from '../icon/icon';
 export class Button {
   @Input() disabled: boolean = false;
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
-  @Input() color: 'primary' | 'info' | 'warning' | 'danger' | '' = '';
+  @Input() color: 'primary' | 'info' | 'warning' | 'danger' | 'success' | '' = '';
   @Input() rounded: 'none' | 'sm' | 'md' | 'lg' | 'full' = 'md';
   @Input() fullWidth: boolean = false;
   @Input() outline: boolean = false;
@@ -53,16 +53,18 @@ export class Button {
       switch (this.color) {
         case 'primary': classes.push('border border-blue-400 text-blue-400'); break;
         case 'info': classes.push('border border-cyan-400 text-cyan-400'); break;
-        case 'warning': classes.push('border border-yellow-400 text-yellow-500'); break;
+        case 'warning': classes.push('border border-orange-400 text-orange-500'); break;
         case 'danger': classes.push('border border-red-500 text-red-500'); break;
+        case 'success': classes.push('border border-green-500 text-green-500'); break;
         default: classes.push('border border-white text-white'); break;
       }
     } else {
       switch (this.color) {
         case 'primary': classes.push('bg-blue-400 text-white hover:bg-blue-500 active:bg-blue-600'); break;
         case 'info': classes.push('bg-cyan-400 text-white hover:bg-cyan-500 active:bg-cyan-600'); break;
-        case 'warning': classes.push('bg-yellow-400 text-white hover:bg-yellow-500 active:bg-yellow-600'); break;
+        case 'warning': classes.push('bg-orange-400 text-white hover:bg-orange-500 active:bg-orange-600'); break;
         case 'danger': classes.push('bg-red-500 text-white hover:bg-red-600 active:bg-red-700'); break;
+        case 'success': classes.push('bg-green-500 text-white hover:bg-green-600 active:bg-green-700'); break;
         default: classes.push('border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 active:bg-gray-200'); break;
       }
     }
