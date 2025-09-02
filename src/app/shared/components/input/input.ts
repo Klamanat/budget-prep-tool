@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, AfterViewInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -6,21 +6,66 @@ import { FormsModule } from '@angular/forms';
     selector: 'app-input',
     standalone: true,
     imports: [CommonModule, FormsModule],
-    template: `<input #inputEl
-                   [type]="type"
-                   [placeholder]="placeholder"
-                   [(ngModel)]="value"
-                   (ngModelChange)="valueChange.emit($event)"
-                   [disabled]="disabled" />`
+    template: `
+    <label class="form-control w-full space-y-1">
+        @if(label) {
+            <!-- Label -->
+            <div class="label flex items-center justify-between">
+              <span class="label-text text-sm font-semibold text-gray-700">{{ label }}</span>
+
+              @if(required) {
+                  <span class="label-text-alt text-red-500">*</span>
+              }
+            </div>
+        }
+
+      <!-- Input Group -->
+      <div class="flex items-center w-full gap-2">
+
+        <!-- Prefix slot -->
+        <ng-content select="[prefix]"></ng-content>
+
+        <!-- Input -->
+        <input #inputEl
+               [type]="type"
+               [placeholder]="placeholder"
+               [(ngModel)]="value"
+               (ngModelChange)="valueChange.emit($event)"
+               [disabled]="disabled"
+               [ngClass]="[
+                 sizeClass,
+                 roundedClass,
+                 variantClass,
+                 disabled ? 'opacity-50 cursor-not-allowed' : '',
+                 'flex-1 focus:outline-none px-2 py-2 border'
+               ]" />
+
+        <!-- Suffix slot -->
+        <ng-content select="[suffix]"></ng-content>
+
+      </div>
+
+      @if(hint) {
+        <!-- Hint -->
+        <div class="label">
+          <span class="label-text-alt text-xs text-gray-300 font-semibold">{{ hint }}</span>
+        </div>
+      }
+    </label>
+  `
 })
-export class InputComponent implements AfterViewInit {
+export class InputComponent {
     @Input() value: string = '';
     @Input() placeholder: string = '';
     @Input() type: string = 'text';
     @Input() disabled: boolean = false;
 
+    @Input() label?: string;
+    @Input() hint?: string;
+    @Input() required = false;
+
     @Input() size: 'sm' | 'md' | 'lg' = 'md';
-    @Input() rounded: 'none' | 'sm' | 'md' | 'lg' | 'full' = 'lg';
+    @Input() rounded: 'none' | 'sm' | 'md' | 'lg' | 'full' = 'md';
     @Input() variant: 'default' | 'outline' | 'ghost' = 'default';
     @Input() width: 'full' | number | string = 'full';
 
@@ -28,44 +73,32 @@ export class InputComponent implements AfterViewInit {
 
     @ViewChild('inputEl', { static: true }) inputEl!: ElementRef<HTMLInputElement>;
 
-    constructor(private r2: Renderer2) { }
-
-    ngAfterViewInit() {
-        // set class
-        const classes: string[] = [];
-
-        // width
-        if (this.width === 'full') classes.push('w-full');
-        else if (typeof this.width === 'number') this.r2.setStyle(this.inputEl.nativeElement, 'width', `${this.width}%`);
-        else if (typeof this.width === 'string' && this.width) this.r2.setStyle(this.inputEl.nativeElement, 'width', this.width);
-
-        // size
+    get sizeClass(): string {
         switch (this.size) {
-            case 'sm': classes.push('py-1 px-2 text-sm'); break;
-            case 'md': classes.push('py-2 px-3 text-base'); break;
-            case 'lg': classes.push('py-3 px-4 text-lg'); break;
+            case 'sm': return 'text-sm py-1 px-2';
+            case 'md': return 'text-base py-2 px-3';
+            case 'lg': return 'text-lg py-3 px-4';
+            default: return '';
         }
+    }
 
-        // rounded
+    get roundedClass(): string {
         switch (this.rounded) {
-            case 'none': classes.push('rounded-none'); break;
-            case 'sm': classes.push('rounded-sm'); break;
-            case 'md': classes.push('rounded-md'); break;
-            case 'lg': classes.push('rounded-lg'); break;
-            case 'full': classes.push('rounded-full'); break;
+            case 'none': return 'rounded-none';
+            case 'sm': return 'rounded-sm';
+            case 'md': return 'rounded-md';
+            case 'lg': return 'rounded-lg';
+            case 'full': return 'rounded-full';
+            default: return '';
         }
+    }
 
-        // variant
+    get variantClass(): string {
         switch (this.variant) {
-            case 'default': classes.push('input input-bordered focus:outline-none focus:ring-0'); break;
-            case 'outline': classes.push('border border-gray-300 focus:ring-1 focus:ring-blue-400'); break;
-            case 'ghost': classes.push('bg-transparent border-none focus:ring-0'); break;
+            case 'default': return 'border-gray-300 focus:ring-0';
+            case 'outline': return 'border-gray-300 focus:ring-0';
+            case 'ghost': return 'border-none bg-transparent focus:ring-0';
+            default: return '';
         }
-
-        // disabled
-        if (this.disabled) classes.push('opacity-50 cursor-not-allowed');
-
-        // apply class to input
-        this.r2.setAttribute(this.inputEl.nativeElement, 'class', classes.join(' '));
     }
 }

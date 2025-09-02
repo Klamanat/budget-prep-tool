@@ -26,7 +26,7 @@ import {
     },
   ],
   template: `
-    <label class="form-control w-full">
+    <label class="form-control w-full space-y-1">
       <!-- ✅ Label -->
        @if(label) {
          <div class="label">
@@ -41,7 +41,7 @@ import {
       <!-- ✅ Textarea -->
       <textarea
         #ta
-        class="textarea w-full focus:outline-none focus:ring-0"
+        class="textarea w-full text-base focus:outline-none focus:ring-0 focus:border-gray-300"
         [ngClass]="[
           size ? 'textarea-' + size : '',
           variant ? 'textarea-' + variant : '',
@@ -63,7 +63,7 @@ import {
       <!-- ✅ Helper text -->
        @if(hint) {
          <div class="label">
-           <span class="label-text-alt text-gray-400 text-xs font-semibold">{{ hint }}</span>
+           <span class="label-text-alt text-gray-300 text-xs font-semibold">{{ hint }}</span>
          </div>
        }
     </label>

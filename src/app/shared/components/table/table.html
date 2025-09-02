@@ -84,9 +84,8 @@
 
   <div class="flex items-center gap-2">
     <p class="text-gray-700 text-sm font-normal">แสดง</p>
-    <select class="select select-sm" (change)="onPageSizeChange($event)">
-      <option *ngFor="let size of pageSizeOptions" [value]="size">{{ size }}</option>
-    </select>
+    <app-select [options]="pageSizeOptions" [(ngModel)]="pageSize"
+      (ngModelChange)="onPageSizeChange($event)"></app-select>
   </div>
 </div>
 }

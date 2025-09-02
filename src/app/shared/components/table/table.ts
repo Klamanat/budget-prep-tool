@@ -3,30 +3,25 @@ import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/co
 import { FormsModule } from '@angular/forms';
 import { Icon } from '../icon/icon';
 import { Checkbox } from "../checkbox/checkbox";
-
-export interface TableHeader {
-  title: string;
-  key: string;
-  width?: string;
-  align?: 'left' | 'center' | 'right';
-  slot?: TemplateRef<any>;
-}
+import { Select } from '../select/select';
+import { ISelectOption } from '@shared/interfaces/ISelectOption';
+import { ITableHeader } from '@shared/interfaces/ITableHeader';
 
 @Component({
   selector: 'app-table',
   standalone: true,
   templateUrl: './table.html',
   styleUrls: ['./table.css'],
-  imports: [CommonModule, FormsModule, Icon, Checkbox],
+  imports: [CommonModule, FormsModule, Icon, Checkbox, Select],
   host: { class: 'overflow-x-auto pt-2 block w-full' }
 })
 export class Table {
-  @Input() headers: TableHeader[] = [];
+  @Input() headers: ITableHeader[] = [];
   @Input() data: any[] = [];
   @Input() selectionType: 'checkbox' | 'radio' | null = null;
   @Input() totalItems: number = 0;
-  @Input() pageSizeOptions: number[] = [5, 10, 15];
-  @Input() pageSize: number = this.pageSizeOptions[0];
+  @Input() pageSizeOptions: ISelectOption[] = [10, 20, 50, 100].map(n => ({ label: n.toString(), value: n }));
+  @Input() pageSize: number = this.pageSizeOptions[0].value;
   @Input() loading: boolean = false; // ✅ ใช้สำหรับ Skeleton
 
   @Output() selectionChange = new EventEmitter<any>();
@@ -74,8 +69,8 @@ export class Table {
     return this.data.filter(row => row.selected);
   }
 
-  onPageSizeChange(event: any) {
-    this.pageSize = +event.target.value;
+  onPageSizeChange(pageSize: any) {
+    this.pageSize = +pageSize;
     this.currentPage = 1;
     this.pageSizeChange.emit(this.pageSize);
     this.pageChange.emit(this.currentPage);

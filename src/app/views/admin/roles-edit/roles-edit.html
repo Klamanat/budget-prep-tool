@@ -26,14 +26,11 @@
 
     <app-row [gap]="4">
         <app-col [sm]="6" [lg]="4">
-            <div class="flex gap-2">
-                <div class="flex-1">
-                    <app-input />
-                </div>
-                <app-button color="primary" iconLeft="search">
+            <app-input placeholder="กรุณาระบุ">
+                <app-button suffix color="primary" iconLeft="search">
                     ค้นหา
                 </app-button>
-            </div>
+            </app-input>
         </app-col>
     </app-row>
 
