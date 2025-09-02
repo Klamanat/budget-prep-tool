@@ -1,21 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Icon } from '../icon/icon';
 import { Checkbox } from "../checkbox/checkbox";
 import { Select } from '../select/select';
 import { ISelectOption } from '@shared/interfaces/ISelectOption';
 import { ITableHeader } from '@shared/interfaces/ITableHeader';
+import { ComponentsModule } from "../components-module";
 
 @Component({
   selector: 'app-table',
   standalone: true,
   templateUrl: './table.html',
   styleUrls: ['./table.css'],
-  imports: [CommonModule, FormsModule, Icon, Checkbox, Select],
+  imports: [CommonModule, FormsModule, Icon, Checkbox, Select, ComponentsModule],
   host: { class: 'overflow-x-auto pt-2 block w-full' }
 })
-export class Table {
+export class Table implements OnInit {
   @Input() headers: ITableHeader[] = [];
   @Input() data: any[] = [];
   @Input() selectionType: 'checkbox' | 'radio' | null = null;
@@ -24,16 +25,48 @@ export class Table {
   @Input() pageSize: number = this.pageSizeOptions[0].value;
   @Input() loading: boolean = false; // ✅ ใช้สำหรับ Skeleton
 
+  // 👉 default sort option
+  @Input() defaultSortKey?: string;
+  @Input() defaultSortDirection: 'asc' | 'desc' = 'asc';
+
   @Output() selectionChange = new EventEmitter<any>();
   @Output() pageSizeChange = new EventEmitter<number>();
   @Output() pageChange = new EventEmitter<number>();
+  @Output() sortChange = new EventEmitter<{ key: string; direction: 'asc' | 'desc' }>();
 
-  selectedRow: any = null;
-  currentPage = 1;
-  allSelectedValue = false;
+  sortKey: string | null = null;
+  sortDirection: 'asc' | 'desc' = 'asc';
+
+  selectedRow: any;
+  currentPage: any;
+  allSelectedValue: any;
 
   // จำนวนแถว skeleton
   skeletonRows = Array.from({ length: 5 });
+
+  ngOnInit(): void {
+    this.selectedRow = null;
+    this.currentPage = 1;
+    this.allSelectedValue = false;
+
+    // 1. ใช้ defaultSortKey ที่ส่งมา
+    if (this.defaultSortKey) {
+      this.sortKey = this.defaultSortKey;
+      this.sortDirection = this.defaultSortDirection;
+    } else {
+      // 2. หา column แรกที่ sortable
+      const firstSortable = this.headers.find(h => h.sortable && h.key);
+      if (firstSortable) {
+        this.sortKey = firstSortable.key!;
+        this.sortDirection = this.defaultSortDirection;
+      }
+    }
+
+    // emit ค่า default ออกไป
+    if (this.sortKey) {
+      this.sortChange.emit({ key: this.sortKey, direction: this.sortDirection });
+    }
+  }
 
   someSelectedButNotAll(): boolean {
     const selectedCount = this.data.filter(r => r.selected).length;
@@ -103,5 +136,18 @@ export class Table {
       this.currentPage = totalPages;
       this.pageChange.emit(this.currentPage);
     }
+  }
+
+  onSort(header: ITableHeader) {
+    if (!header.key || !header.sortable) return;
+
+    if (this.sortKey === header.key) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortKey = header.key;
+      this.sortDirection = 'asc';
+    }
+
+    this.sortChange.emit({ key: header.key, direction: this.sortDirection });
   }
 }

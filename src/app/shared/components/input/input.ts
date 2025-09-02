@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
         @if(label) {
             <!-- Label -->
             <div class="label flex items-center justify-between">
-              <span class="label-text text-sm font-semibold text-gray-700">{{ label }}</span>
+              <span class="label-text text-sm font-semibold text-gray-600">{{ label }}</span>
 
               @if(required) {
                   <span class="label-text-alt text-red-500">*</span>

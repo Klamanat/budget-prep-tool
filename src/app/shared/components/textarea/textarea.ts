@@ -30,7 +30,7 @@ import {
       <!-- ✅ Label -->
        @if(label) {
          <div class="label">
-           <span class="label-text text-sm font-semibold text-gray-700">{{ label }}</span>
+           <span class="label-text text-sm font-semibold text-gray-600">{{ label }}</span>
 
            @if(required) {
              <span class="label-text-alt text-red-500">*</span>
@@ -60,12 +60,25 @@ import {
         (blur)="onTouched()"
       ></textarea>
 
-      <!-- ✅ Helper text -->
-       @if(hint) {
-         <div class="label">
-           <span class="label-text-alt text-gray-300 text-xs font-semibold">{{ hint }}</span>
-         </div>
-       }
+        <!-- ✅ Helper + Counter -->
+        <div class="flex justify-between items-center">
+          <div class="w-4/5">
+            @if(hint) {
+              <span class="label-text-alt text-gray-300 text-xs font-semibold break-words w-full block">
+                {{ hint }}
+              </span>
+            }
+          </div>
+          <div class="flex">
+            @if(maxlength) {
+              <span
+                class="label-text-alt text-gray-400 text-xs self-end whitespace-nowrap"
+              >
+                {{ value.length || 0 }} / {{ maxlength }}
+              </span>
+            }
+          </div>
+        </div>
     </label>
   `,
 })

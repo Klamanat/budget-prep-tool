@@ -3,14 +3,23 @@
     <tr class="h-12 text-blue-100 cursor-pointer text-center">
       @if(selectionType) {
       <th class="bg-blue-400 border border-blue-300 py-1 px-3 w-12">
+        @if(selectionType === 'checkbox') {
         <app-checkbox #chkAll [(ngModel)]="allSelectedValue" [indeterminate]="someSelectedButNotAll()"
           (checkedChange)="toggleAll($event)" class="w-3.5 h-3.5"></app-checkbox>
+        }
       </th>
       }
 
       @for (header of headers; track header) {
-      <th class="bg-blue-400 border border-blue-300 py-1 px-3" [attr.width]="header?.width">
+      <th class="bg-blue-400 border border-blue-300 py-1 px-3" [attr.width]="header?.width"
+        (click)="header.sortable && onSort(header)">
         {{ header?.title }}
+
+        @if(header.sortable && sortKey === header.key) {
+        <span>
+          {{ sortDirection === 'asc' ? '▲' : '▼' }}
+        </span>
+        }
       </th>
       }
     </tr>
@@ -27,8 +36,8 @@
           class="w-3.5 h-3.5"></app-checkbox>
         }
         @if(selectionType === 'radio') {
-        <input type="radio" name="rowSelection" [(ngModel)]="selectedRow" [value]="row"
-          (change)="onSelectionChange(row)" class="w-3.5 h-3.5" />
+        <app-radio [options]="[{ label: '', value: row }]" name="rowSelection" [(ngModel)]="selectedRow"
+          (ngModelChange)="onSelectionChange(row)"></app-radio>
         }
       </td>
       }
@@ -38,7 +47,7 @@
         @if(header.slot) {
         <ng-container [ngTemplateOutlet]="header.slot" [ngTemplateOutletContext]="{ $implicit: row }"></ng-container>
         } @else {
-        <span>{{ header?.key ? row[header.key] : '' }}</span>
+        <span>{{ header?.key ? row[header.key ?? ''] : '' }}</span>
         }
       </td>
       }
