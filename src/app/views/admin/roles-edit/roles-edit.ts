@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalService } from '@shared/common/modal.service';
 import { ComponentsModule } from '@shared/components/components-module';
+import { Roles } from '../roles/roles';
+import { AlertService } from '@shared/common/alert.service';
 
 @Component({
   selector: 'app-roles-edit',
@@ -30,7 +32,7 @@ export class RolesEdit {
     }
   ]
 
-  constructor(private router: Router, private modalService: ModalService) { }
+  constructor(private router: Router, private modalService: ModalService, private alertService: AlertService) { }
 
   gotoMain() {
     this.router.navigate(['/admin/roles']);
@@ -40,6 +42,7 @@ export class RolesEdit {
     this.modalService.confirm('ยืนยันการบันทึกข้อมูล', 'คุณต้องการยืนยันการบันทึกข้อมูลที่สร้างใหม่นี้หรือไม่?').then(result => {
       if (result) {
         // TODO: Implement save logic
+        this.alertService.success('บันทึกสำเร็จ!');
       }
     });
   }

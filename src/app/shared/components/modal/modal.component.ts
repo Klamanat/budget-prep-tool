@@ -33,7 +33,7 @@ type ModalType = 'confirm' | 'delete' | 'warning' | 'success';
         @if(title) {
             <p class="text-base text-gray-800 font-semibold">{{ title }}</p>
         }
-        
+
         @if(message) {
             <p class="text-sm text-gray-800 font-normal">
               {{ message }}
@@ -80,7 +80,7 @@ export class ModalComponent implements OnInit, OnDestroy {
     get iconName(): string {
         switch (this.type) {
             case 'delete': return 'error-circle';       // ตัวอย่าง icon ของ delete
-            case 'confirm': return 'error-circle';// confirm
+            case 'confirm': return 'info-circle';// confirm
             case 'warning': return 'warning';   // warning
             case 'success': return 'check-circle'; // success
             default: return 'warning';
