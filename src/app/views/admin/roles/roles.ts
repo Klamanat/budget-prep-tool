@@ -16,6 +16,8 @@ export class Roles implements OnInit {
 
   headers: any[] = [];
   selectedRole: any[] = [];
+  data: any[] = [];
+  loading = true;
 
   ngOnInit() {
     this.headers = [
@@ -25,12 +27,17 @@ export class Roles implements OnInit {
       { title: 'Last Update', key: 'updatedAt', width: '160', align: 'center' },
       { title: 'Edit', slot: this.actions, width: '80', align: 'center' }
     ];
+
+    setTimeout(() => {
+      this.data = [
+        { id: '1', name: 'Admin', description: 'Administrator role', createdAt: '2023-01-01', updatedAt: '2023-01-02', actions: 'Edit' },
+        { id: '2', name: 'User', description: 'Standard user role', createdAt: '2023-01-01', updatedAt: '2023-01-02', actions: 'Edit' }
+      ];
+      this.loading = false;
+    }, 2000);
   }
 
-  data: any[] = [
-    { id: '1', name: 'Admin', description: 'Administrator role', createdAt: '2023-01-01', updatedAt: '2023-01-02', actions: 'Edit' },
-    { id: '2', name: 'User', description: 'Standard user role', createdAt: '2023-01-01', updatedAt: '2023-01-02', actions: 'Edit' }
-  ];
+
 
   onSelectionChange(selected: any) {
     this.selectedRole = selected;

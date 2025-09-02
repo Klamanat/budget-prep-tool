@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, forwardRef, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
@@ -9,10 +9,13 @@ import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/f
     template: `
     <label class="label cursor-pointer inline-flex items-center">
       <input
+        #checkboxEl
         type="checkbox"
         class="checkbox checkbox-xs rounded-sm bg-white"
         [class.checked:bg-blue-600]="color === 'primary'"
         [class.checked:text-white]="color === 'primary'"
+        [class.indeterminate:bg-blue-600]="color === 'primary'"
+        [class.indeterminate:text-white]="color === 'primary'"
         [class.checked:bg-green-600]="color === 'success'"
         [class.checked:bg-red-600]="color === 'error'"
         [checked]="checked"
@@ -27,18 +30,32 @@ import { FormsModule, NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/f
         multi: true
     }]
 })
-export class Checkbox implements ControlValueAccessor {
+export class Checkbox implements ControlValueAccessor, AfterViewInit, OnChanges {
     @Input() label = '';
     @Input() color: 'primary' | 'success' | 'error' | '' = 'primary';
+    @Input() indeterminate = false; // ✅ เพิ่มตัวแปร indeterminate
     @Output() checkedChange = new EventEmitter<boolean>();
+
+    @ViewChild('checkboxEl', { static: true }) checkboxEl!: ElementRef<HTMLInputElement>;
 
     checked = false;
 
     private onTouched: () => void = () => { };
     private onChanged: (val: boolean) => void = () => { };
 
+    ngAfterViewInit() {
+        this.updateIndeterminate();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes['indeterminate']) {
+            this.updateIndeterminate();
+        }
+    }
+
     writeValue(value: boolean): void {
         this.checked = value;
+        this.updateIndeterminate();
     }
 
     registerOnChange(fn: (val: boolean) => void): void {
@@ -51,9 +68,17 @@ export class Checkbox implements ControlValueAccessor {
 
     onChange(event: Event) {
         const input = event.currentTarget as HTMLInputElement;
-        if (!input) return; // ป้องกัน null
+        if (!input) return;
         this.checked = input.checked;
+        this.indeterminate = false; // reset indeterminate เมื่อ user กดเอง
+        this.updateIndeterminate();
         this.onChanged(this.checked);
         this.checkedChange.emit(this.checked);
+    }
+
+    private updateIndeterminate() {
+        if (this.checkboxEl) {
+            this.checkboxEl.nativeElement.indeterminate = this.indeterminate;
+        }
     }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Icon } from '../icon/icon';
 import { Checkbox } from "../checkbox/checkbox";
@@ -9,7 +9,7 @@ export interface TableHeader {
   key: string;
   width?: string;
   align?: 'left' | 'center' | 'right';
-  slot?: TemplateRef<any>; // custom template
+  slot?: TemplateRef<any>;
 }
 
 @Component({
@@ -26,38 +26,42 @@ export class Table {
   @Input() selectionType: 'checkbox' | 'radio' | null = null;
   @Input() totalItems: number = 0;
   @Input() pageSizeOptions: number[] = [5, 10, 15];
-  @Input() pageSize: number = this.pageSizeOptions[0]; // ค่าเริ่มต้น (default)
+  @Input() pageSize: number = this.pageSizeOptions[0];
+  @Input() loading: boolean = false; // ✅ ใช้สำหรับ Skeleton
+
   @Output() selectionChange = new EventEmitter<any>();
   @Output() pageSizeChange = new EventEmitter<number>();
   @Output() pageChange = new EventEmitter<number>();
 
   selectedRow: any = null;
-  currentPage = 1; // หน้าเริ่มต้น
-
+  currentPage = 1;
   allSelectedValue = false;
 
-  ngAfterViewInit() {
-    this.updateAllSelectedValue();
+  // จำนวนแถว skeleton
+  skeletonRows = Array.from({ length: 5 });
+
+  someSelectedButNotAll(): boolean {
+    const selectedCount = this.data.filter(r => r.selected).length;
+    return selectedCount > 0 && selectedCount < this.data.length;
   }
 
   updateAllSelectedValue() {
-    this.allSelectedValue = this.data && this.data.every(row => row.selected);
+    const selectedCount = this.data.filter(r => r.selected).length;
+    this.allSelectedValue = selectedCount === this.data.length;
   }
 
-  // Toggle all rows (checkbox)
   toggleAll(checked: boolean) {
     if (!this.selectionType) return;
     this.data.forEach(row => row.selected = checked);
     this.selectionChange.emit(this.getSelectedRows());
   }
 
-  // Single row selection
   onSelectionChange(row: any) {
     if (this.selectionType === 'radio') {
       this.selectedRow = row;
       this.selectionChange.emit(row);
     } else if (this.selectionType === 'checkbox') {
-      this.updateAllSelectedValue(); // update state checkbox Check All
+      this.updateAllSelectedValue();
       this.selectionChange.emit(this.getSelectedRows());
     }
   }
@@ -71,10 +75,10 @@ export class Table {
   }
 
   onPageSizeChange(event: any) {
-    this.pageSize = +event.target.value; // แปลงเป็น number
-    this.currentPage = 1; // กลับไปหน้าแรก
-    this.pageSizeChange.emit(this.pageSize); // ส่ง event ให้ parent component
-    this.pageChange.emit(this.currentPage); // reload data หน้าแรก
+    this.pageSize = +event.target.value;
+    this.currentPage = 1;
+    this.pageSizeChange.emit(this.pageSize);
+    this.pageChange.emit(this.currentPage);
   }
 
   goToFirst() {

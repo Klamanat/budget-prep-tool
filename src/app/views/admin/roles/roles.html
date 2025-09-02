@@ -28,7 +28,7 @@
     <div class="grid grid-cols-12">
         <div class="col-span-12">
             <app-table [headers]="headers" [data]="data" [selectionType]="'checkbox'"
-                (selectionChange)="onSelectionChange($event)" [totalItems]="data.length" />
+                (selectionChange)="onSelectionChange($event)" [totalItems]="data.length" [loading]="loading" />
         </div>
     </div>
 

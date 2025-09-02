@@ -7,16 +7,26 @@ import { Icon } from '../icon/icon';
   standalone: true,
   imports: [CommonModule, Icon],
   template: `
-      @if(iconLeft) {
+    <!-- left icon -->
+    @if(iconLeft) {
+    <span class="inline-flex w-5 h-5 items-center justify-center">
         <app-icon [name]="iconLeft" size="20"></app-icon>
-      }
+      </span>
+    }
 
-      <ng-content></ng-content>
+    <!-- slot -->
+    <ng-content></ng-content>
 
-      @if(iconRight) {
+    <!-- right icon -->
+    @if(iconRight) {
+    <span class="inline-flex w-5 h-5 items-center justify-center">
         <app-icon [name]="iconRight" size="20"></app-icon>
-      }
-  `
+      </span>
+    }
+  `,
+  host: {
+    class: 'inline-flex items-center justify-center gap-1 cursor-pointer h-auto select-none transition-colors duration-150 ease-in-out'
+  }
 })
 export class Button {
   @Input() disabled: boolean = false;
@@ -49,11 +59,11 @@ export class Button {
       }
     } else {
       switch (this.color) {
-        case 'primary': classes.push('bg-blue-400 text-white hover:bg-blue-500'); break;
-        case 'info': classes.push('bg-cyan-400 text-white hover:bg-cyan-500'); break;
-        case 'warning': classes.push('bg-yellow-400 text-white hover:bg-yellow-500'); break;
-        case 'danger': classes.push('bg-red-500 text-white hover:bg-red-600'); break;
-        default: classes.push('border border-gray-300 bg-white text-gray-700 hover:bg-gray-100'); break;
+        case 'primary': classes.push('bg-blue-400 text-white hover:bg-blue-500 active:bg-blue-600'); break;
+        case 'info': classes.push('bg-cyan-400 text-white hover:bg-cyan-500 active:bg-cyan-600'); break;
+        case 'warning': classes.push('bg-yellow-400 text-white hover:bg-yellow-500 active:bg-yellow-600'); break;
+        case 'danger': classes.push('bg-red-500 text-white hover:bg-red-600 active:bg-red-700'); break;
+        default: classes.push('border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 active:bg-gray-200'); break;
       }
     }
 
@@ -68,9 +78,6 @@ export class Button {
 
     // width
     if (this.fullWidth) classes.push('w-full');
-
-    // common
-    classes.push('inline-flex items-center justify-center gap-1 cursor-pointer h-auto transition-all duration-150');
 
     // disabled
     if (this.disabled) {
