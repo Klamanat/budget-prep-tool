@@ -1,7 +1,7 @@
 <div class="min-h-screen flex flex-col md:flex-row bg-gray-100">
     <div [ngClass]="isSidebarCollapsed ? 'w-[60px]' : 'w-[300px]'"
         class="transition-all duration-300 shadow-md bg-white overflow-visible hidden lg:block">
-        <div class="h-[68px] bg-[#00A6E6]">
+        <div class="sticky top-0 z-50 h-[68px] bg-[#00A6E6]">
             <div class="flex items-center justify-center h-full">
                 <img [src]="isSidebarCollapsed ? 'assets/images/ktb_logo_crop.png' : 'assets/images/ktb_logo_1.png'"
                     alt="ktb_logo" class="h-[55px] mx-auto" />
@@ -13,7 +13,8 @@
                 }
             </div>
         </div>
-        <div class="bg-blue-700 h-10 flex items-center justify-center gap-2"
+
+        <div class="sticky top-[68px] z-40 bg-blue-700 h-10 flex items-center justify-center gap-2"
             [ngClass]="isSidebarCollapsed ? 'bg-white': ''">
             @if(!isSidebarCollapsed) {
             <app-icon [name]="menus.icon" size="25" class="text-white" [ariaLabel]="menus.title"></app-icon>
@@ -68,11 +69,11 @@
                 </li>
             </ul>
         </div>
-
         }
     </div>
     <div class="flex-1">
-        <div class="flex px-2 lg:px-6 items-center bg-gradient-to-r from-[#00A6E6] to-[#007BAA] h-[68px]">
+        <div
+            class="sticky top-0 z-50 flex px-2 lg:px-6 items-center bg-gradient-to-r from-[#00A6E6] to-[#007BAA] h-[68px]">
             <div class="flex w-64 justify-between items-center">
                 <div class="pl-2 lg:hidden drawer-start">
                     <input id="drawer-menu" type="checkbox" class="drawer-toggle" />
@@ -159,7 +160,7 @@
             </div>
         </div>
 
-        <div class="h-10 bg-white shadow-md overflow-x-auto hidden lg:flex">
+        <div class="sticky top-[68px] z-40 h-10 bg-white shadow-md overflow-x-auto hidden lg:flex">
             <ul class="flex items-center px-4 md:px-8 h-full w-max whitespace-nowrap">
                 <li *ngFor="let item of menuItems; let i = index"
                     class="py-2 px-4 md:px-6 flex items-center gap-1 flex-shrink-0">
@@ -167,8 +168,9 @@
                         [ngClass]="isActive(item.path) ? 'text-blue-400' : 'text-gray-700'"
                         [ariaLabel]="item.title"></app-icon>
                     <a class="text-sm font-medium truncate"
-                        [ngClass]="isActive(item.path) ? 'text-blue-400' : 'text-gray-700'" [routerLink]="item.path">{{
-                        item.title }}</a>
+                        [ngClass]="isActive(item.path) ? 'text-blue-400' : 'text-gray-700'" [routerLink]="item.path">
+                        {{ item.title }}
+                    </a>
                 </li>
             </ul>
         </div>

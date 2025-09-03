@@ -18,24 +18,26 @@ interface IAlert {
     imports: [CommonModule, Icon],
     template: `
         <div class="fixed top-28 right-8 flex flex-col gap-2 z-50">
-            <div *ngFor="let alert of alerts"
-                [ngClass]="[alertClasses(alert.type), alert.closing ? 'opacity-0 translate-x-10' : 'opacity-100 translate-x-0']"
-                class="p-4 rounded-sm shadow flex items-center bg-white justify-between min-w-[480px] max-w-xs transform transition-all duration-300">
-                
-                <div class="flex items-center gap-2">
-                <!-- icon -->
-                <app-icon [name]="iconName(alert.type)"
-                            [ngClass]="iconClasses(alert.type)"
-                            [size]="24" aria-hidden="true">
-                </app-icon>
-
-                <!-- message -->
-                <span class="text-gray-700 text-sm font-normal">{{ alert.message }}</span>
+            @for(alert of alerts; track alert) {
+                <div
+                    [ngClass]="[alertClasses(alert.type), alert.closing ? 'opacity-0 translate-x-10' : 'opacity-100 translate-x-0']"
+                    class="p-4 rounded-sm shadow-lg flex items-center bg-white justify-between min-w-[480px] max-w-xs transform transition-all duration-300">
+                    
+                    <div class="flex items-center gap-2">
+                    <!-- icon -->
+                    <app-icon [name]="iconName(alert.type)"
+                                [ngClass]="iconClasses(alert.type)"
+                                [size]="24" aria-hidden="true">
+                    </app-icon>
+    
+                    <!-- message -->
+                    <span class="text-gray-700 text-sm font-normal">{{ alert.message }}</span>
+                    </div>
+    
+                    <!-- close button -->
+                    <button class="ml-2 font-bold cursor-pointer" (click)="remove(alert.id)">&times;</button>
                 </div>
-
-                <!-- close button -->
-                <button class="ml-2 font-bold cursor-pointer" (click)="remove(alert.id)">&times;</button>
-            </div>
+            }
         </div>
   `,
 })
